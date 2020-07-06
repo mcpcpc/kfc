@@ -45,85 +45,58 @@ select_palette(void)
 	while(fgets(line, len, fp) != NULL)
 	{
 		envvar = strtok(line, "=");
-		switch (line)
-		{
-		    case "color00":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;0;#%s\\033\\", envvar);
-		        break;
-		    case "color01":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;1;#%s\\033\\", envvar);
-		        break;
-		    case "color02":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;2;#%s\\033\\", envvar);
-		        break;
-		    case "color03":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;3;#%s\\033\\", envvar);
-		        break;
-		    case "color04":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;4;#%s\\033\\", envvar);
-		        break;
-		    case "color05":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;5;#%s\\033\\", envvar);
-		        break;
-		    case "color06":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;6;#%s\\033\\", envvar);
-		        break;
-		    case "color07":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;7;#%s\\033\\", envvar);
-		        break;
-		    case "color08":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;0;#%s\\033\\", envvar);
-		        break;
-		    case "color09":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;9;#%s\\033\\", envvar);
-		        break;
-		    case "color10":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;10;#%s\\033\\", envvar);
-		        break;
-		    case "color11":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;11;#%s\\033\\", envvar);
-		        break;
-		    case "color12":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;12;#%s\\033\\", envvar);
-		        break;
-		    case "color13":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;13;#%s\\033\\", envvar);
-		        break;
-		    case "color14":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;14;#%s\\033\\", envvar);
-		        break;
-		    case "color15":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]4;15;#%s\\033\\", envvar);
-		        break;
-		    case "foreground":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]10;#%s\\033\\", envvar);
-		        break;
-		    case "background":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]11;#%s\\033\\", envvar);
-		        break;
-		    case "cursor":
-		        envvar = strtok(NULL, "=");
-		        sprintf(p.CLI, "\\033]12;#%s\\033\\", envvar);
-		        break;
+
+        if (strcmp(line, "color00") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;0;#%s\\033\\", envvar);
 		}
+		if (strcmp(line, "color01") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;1;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color02") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;2;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color03") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;3;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color04") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;4;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color05") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;5;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color06") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;6;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color07") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;7;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color08") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;8;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color09") == 0
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;9;#%s\\033\\", envvar);
+		}
+
 		strcat(p.SEQ, p.CLI);
 	}
 	fclose(fp);
