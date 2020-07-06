@@ -98,6 +98,51 @@ select_palette(void)
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;9;#%s\\033\\", envvar);
 		}
+		if (strcmp(line, "color10") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;10;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color11") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;11;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color12") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;12;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color13") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;13;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color14") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;14;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "color15") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;15;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "foreground") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]10;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "background") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]11;#%s\\033\\", envvar);
+		}
+		if (strcmp(line, "cursor") == 0)
+        {
+		    envvar = strtok(NULL, "=");
+		    sprintf(p.CLI, "\\033]4;12;#%s\\033\\", envvar);
+		}
 		strcat(p.PRI, p.CLI);
 	}
 	fclose(fp);
