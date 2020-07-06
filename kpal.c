@@ -98,10 +98,11 @@ select_palette(void)
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;9;#%s\\033\\", envvar);
 		}
-        printf("string: %s", p.CLI);
+		strcat(p.PRI, p.CLI);
 	}
 	fclose(fp);
 	free(line);
+	printf("string: %s", p.PRI);
     return 0;
 }
 

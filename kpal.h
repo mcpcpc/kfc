@@ -7,4 +7,5 @@ struct
     char *SELE; // selected palette
     char CLI[1024];
     char SEQ[1024];
+    char PRI[1024];
 } p;
