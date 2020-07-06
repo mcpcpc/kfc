@@ -39,6 +39,8 @@ select_palette(void)
 	char *line = malloc(sizeof(char) * len);
 	int i = 0;
 	char *envvar;
+	strcat(p.SEQ, "/");
+	strcat(p.SEQ, p.SEL);
 	FILE *fp = fopen(p.SEQ, "r");
 	setenv("LC_ALL", "C", 1);
 	system("exec 6>&1 >/dev/null");
