@@ -40,7 +40,7 @@ select_palette(void)
 	int i = 0;
 	char *envvar;
 	strcat(p.SEQ, "/");
-	strcat(p.SEQ, p.SEL);
+	strcat(p.SEQ, p.SELE);
 	FILE *fp = fopen(p.SEQ, "r");
 	setenv("LC_ALL", "C", 1);
 	system("exec 6>&1 >/dev/null");
