@@ -150,7 +150,7 @@ print_palette(void)
 }
 
 int
-main(nt argc, char **argv)
+main(int argc, char **argv)
 {
 	extern char *optarg;
 	extern int optind, optopt;
@@ -161,7 +161,7 @@ main(nt argc, char **argv)
         exit(2);
     }
     
-    if (find_palettes() = 1)
+    if (find_palettes() == 1)
     {
         fprintf(stderr, "Palette directory not found\n");
         exit(2);
