@@ -46,52 +46,52 @@ select_palette(void)
 	{
 		envvar = strtok(line, "=");
 
-        if (strcmp(line, "color00") == 0
+        if (strcmp(line, "color00") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;0;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color01") == 0
+		if (strcmp(line, "color01") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;1;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color02") == 0
+		if (strcmp(line, "color02") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;2;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color03") == 0
+		if (strcmp(line, "color03") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;3;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color04") == 0
+		if (strcmp(line, "color04") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;4;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color05") == 0
+		if (strcmp(line, "color05") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;5;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color06") == 0
+		if (strcmp(line, "color06") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;6;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color07") == 0
+		if (strcmp(line, "color07") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;7;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color08") == 0
+		if (strcmp(line, "color08") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;8;#%s\\033\\", envvar);
 		}
-		if (strcmp(line, "color09") == 0
+		if (strcmp(line, "color09") == 0)
         {
 		    envvar = strtok(NULL, "=");
 		    sprintf(p.CLI, "\\033]4;9;#%s\\033\\", envvar);
