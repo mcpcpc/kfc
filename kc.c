@@ -40,7 +40,7 @@ select_palette(void)
 	}
 	fclose(fp);
 	free(line);
-	sprintf(p.PRI, "printf %%b \" \
+	sprintf(p.PRI, "printf %%b \"\
 \\e]4;0;#$(echo $color00)\\e\\ \
 \\e]4;1;#$(echo $color01)\\e\\ \
 \\e]4;2;#$(echo $color02)\\e\\ \
@@ -59,15 +59,13 @@ select_palette(void)
 \\e]4;12;#$(echo $color15)\\e\\ \
 \\e]10;#$(echo $foreground)\\e\\ \
 \\e]11;#$(echo $background)\\e\\ \
-\\e]12;#$(echo $cursor)\\e\\ \
-\" > %s/sequence", p.CONF);
-	system(p.PRI);
-    sprintf(p.PRI, "printf '%s' > %s/current", p.SEL, p.CONF);
-	system(p.PRI);
-	sprintf(p.PRI, "cat %s/sequence > /dev/fd/0", p.CONF);
-	system(p.PRI);
-	sprintf(p.PRI, "cat %s/sequence > /dev/pts/[0-9]", p.CONF);
-	system(p.PRI);
+\\e]12;#$(echo $cursor)\\e\\ \"", p.CONF);
+	sprintf(p.CLI, "%s > %s/sequence", p.PRI, p.CONF);
+	system(p.CLI);
+    sprintf(p.CLI, "%s > %s/current", p.PRI, p.CONF);
+	system(p.CLI);
+	sprintf(p.CLI, "%s > /dev/fd/0", p.PRI);
+	system(p.CLI);
 	return 0;
 }
 
