@@ -40,7 +40,7 @@ select_palette(void)
 	}
 	fclose(fp);
 	free(line);
-	sprintf(p.PRI, "printf %%b \" \\e]4;0;$(echo $color00)\\e\\ \
+	sprintf(p.PRI, "printf %%b \"\\e]4;0;$(echo $color00)\\e\\ \
 \\e]4;1;$(echo $color01)\\e\\ \
 \\e]4;2;$(echo $color02)\\e\\ \
 \\e]4;3;$(echo $color03)\\e\\ \
@@ -63,6 +63,10 @@ select_palette(void)
 	printf("%s\n", p.PRI);
 	system(p.PRI);
     sprintf(p.PRI, "printf '%s' > %s/current", p.SEL, p.CONF);
+	system(p.PRI);
+    sprintf(p.PRI, "printf '%s' > /dev/fd/0", p.SEL);
+	system(p.PRI);
+    sprintf(p.PRI, "printf '%s' > /dev/pts/0", p.SEL);
 	system(p.PRI);
 	return 0;
 }
