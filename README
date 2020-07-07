@@ -1,12 +1,12 @@
-kpal
+kc
 
-An on-the-fly palette changer written in c, inspired by Dylan Araps' okpal [0].  
+KISS colors, an on-the-fly palette changer written in C, inspired by Dylan Araps' okpal [0].  
 
 
 BACKGROUND
 ----------
 
-This code base is non-functional at this time and will be promoted to release 
+This code base is partially-functional at this time and will be promoted to release 
 once the following features are implemented:
 
 - [ ] Select palette
@@ -24,8 +24,8 @@ INSTALLATION
 
 From git source:
 
-$ git clone https://github.com/mcpcpc/kpal.git
-$ cd kpal/
+$ git clone https://github.com/mcpcpc/kc.git
+$ cd kc/
 $ make
 $ make install
 
@@ -33,7 +33,7 @@ $ make install
 USAGE
 -----
 
-kpal [-s palette|-L|-r] [l|-v|-p]
+kc [-s palette|-L|-r] [l|-v|-p]
 -s palette  Select a palette
 -l          List all palettes
 -p          Print current palette
