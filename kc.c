@@ -1,3 +1,4 @@
+#include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -26,19 +27,18 @@ find_palettes(void)
 int
 select_palette(void)
 {
-	size_t len = 255;
-	char *line = malloc(sizeof(char) * len);
+//	size_t len = 255;
+	p.len = 255;
+	char *line = malloc(sizeof(char) * p.len);
 	char *envvar, *envval;
-	FILE *fp = fopen(p.SEL, "r");
-	setenv("LC_ALL", "C", 1);
-	system("exec 6>&1 >/dev/null");
-	while(fgets(line, len, fp) != NULL)
+	p.fp = fopen(p.SEL, "r");
+	while(fgets(line, p.len, p.fp) != NULL)
 	{
 		envvar = strtok(line, "=");
 		envval = strtok(NULL, "=");
 		setenv(envvar, envval, 1);
 	}
-	fclose(fp);
+	fclose(p.fp);
 	free(line);
 	sprintf(p.PRI, "printf %%b \"\
 \\e]4;0;#$(echo $color00)\\e\\ \
@@ -60,11 +60,15 @@ select_palette(void)
 \\e]10;#$(echo $foreground)\\e\\ \
 \\e]11;#$(echo $background)\\e\\ \
 \\e]12;#$(echo $cursor)\\e\\ \"", p.CONF);
-	sprintf(p.CLI, "%s > %s/sequence", p.PRI, p.CONF);
-	system(p.CLI);
-    sprintf(p.CLI, "%s > %s/current", p.PRI, p.CONF);
-	system(p.CLI);
+	p.fp = fopen(p.CSEQ, "w");
+	fprintf(p.fp, "%s", p.PRI);
+	fclose(p.fp);
+	p.fp = fopen(p.CCUR, "w");
+	fprintf(p.fp, "%s", p.SEL);
+	fclose(p.fp);
 	sprintf(p.CLI, "%s > /dev/fd/0", p.PRI);
+	system(p.CLI);
+	sprintf(p.CLI, "%s > /dev/pts/0", p.PRI);
 	system(p.CLI);
 	return 0;
 }
@@ -79,29 +83,31 @@ int
 list_palette(void)
 {
 	struct dirent *de;
-	DIR *dr = opendir(p.SEL);
+	p.dr = opendir(p.SEL);
 
-	if (dr == NULL)
+	if (p.dr == NULL)
 	{
 		printf("Could not open directory");
 		return 1;
 	}
 
-	while((de = readdir(dr)) != NULL)
+	while((de = readdir(p.dr)) != NULL)
 	{
 		printf("->%s\n", de->d_name);
 	}
 
-	closedir(dr);
+	closedir(p.dr);
     return 0;
 }
 
 int
 print_palette(void)
 {
-	FILE *fp = fopen(p.CONF, "r");
-	fclose(fp);
-	printf("\nUsing: %s\n", p.SEL);
+    char str[60];
+    p.fp = fopen(p.CCUR, "r");
+	fgets(str, 60, p.fp);
+	printf("\nUsing: %s\n", str);
+	fclose(p.fp);
     for (int i = 0; i < 15; i++)
 	{
 		printf("\e[48;5;%dm  \e[0m", i);
@@ -127,7 +133,13 @@ main(int argc, char **argv)
         exit(2);
     }
 	strcat(p.CONF, "/kc");
-    
+	if ( mkdir(p.CONF,0777) == 0 )
+	{
+		printf("Created 'kc' directory in XDG_CONFIG_HOME.");
+	}
+	sprintf(p.CCUR, "%s/current", p.CONF);
+	sprintf(p.CSEQ, "%s/sequence", p.CONF);
+
     if (find_palettes() == 1)
     {
         fprintf(stderr, "Palette directory not found\n");

@@ -1,22 +1,23 @@
 kc
 
-KISS colors, an on-the-fly palette changer written in C, inspired by Dylan Araps' okpal [0].  
+KISS colors, an on-the-fly color palette changer written in C.
 
 
 BACKGROUND
 ----------
 
-This code base is partially-functional at this time and will be promoted to release 
-once the following features are implemented:
+This project was inspired by Dylan Arap's okpal [0] palette change. This code 
+base is partially-functional at this time and will be promoted to release once 
+the following features are implemented:
 
-- [ ] Select palette
+- [x] Select palette
 - [ ] Select random palette
 - [x] List all palettes
 - [x] Set light theme
 - [x] Print help/usage.
 - [x] Print Version
 - [x] Print current palette
-- [ ] save new palette to .config/
+- [x] save new palette to .config/
 
 
 INSTALLATION
