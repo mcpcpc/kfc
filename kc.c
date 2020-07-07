@@ -66,7 +66,7 @@ select_palette(void)
 	system(p.PRI);
 	sprintf(p.PRI, "cat %s/sequence > /dev/fd/0", p.CONF);
 	system(p.PRI);
-	sprintf(p.PRI, "cat %s/sequence > /dev/pts/0", p.CONF);
+	sprintf(p.PRI, "cat %s/sequence > /dev/pts/[0-9]", p.CONF);
 	system(p.PRI);
 	return 0;
 }
