@@ -3,14 +3,14 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <string.h>
-#include "kpal.h"
+#include "kc.h"
 
 int
 find_palettes(void)
 {
-	if ( access("/etc/kpal/palettes", F_OK) == 0 )
+	if ( access("/etc/kc/palettes", F_OK) == 0 )
     {
-		strcpy(p.SEQ, "/etc/kpal/palettes");
+		strcpy(p.SEQ, "/etc/kc/palettes");
         return 0;
     }
 
@@ -124,7 +124,7 @@ main(int argc, char **argv)
         fprintf(stderr, "XDG_CONFIG_HOME not defined\n");
         exit(2);
     }
-	strcat(p.CONF, "/kpal");
+	strcat(p.CONF, "/kc");
     
     if (find_palettes() == 1)
     {
@@ -172,7 +172,7 @@ main(int argc, char **argv)
     if (p.errf)
     {
         fprintf(stderr, "\
-usage: cpal [-s palette|-r|-L] [l|-v|-p]\n \
+usage: kc [-s palette|-r|-L] [l|-v|-p]\n \
 -s palette  Select a palette\n \
 -l          List all palettes\n \
 -p          Print current palette\n \
