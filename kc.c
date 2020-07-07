@@ -40,33 +40,33 @@ select_palette(void)
 	}
 	fclose(fp);
 	free(line);
-	sprintf(p.PRI, "printf %%b \"\\e]4;0;$(echo $color00)\\e\\ \
-\\e]4;1;$(echo $color01)\\e\\ \
-\\e]4;2;$(echo $color02)\\e\\ \
-\\e]4;3;$(echo $color03)\\e\\ \
-\\e]4;4;$(echo $color04)\\e\\ \
-\\e]4;5;$(echo $color05)\\e\\ \
-\\e]4;6;$(echo $color06)\\e\\ \
-\\e]4;7;$(echo $color07)\\e\\ \
-\\e]4;8;$(echo $color08)\\e\\ \
-\\e]4;9;$(echo $color09)\\e\\ \
-\\e]4;10;$(echo $color10)\\e\\ \
-\\e]4;11;$(echo $color11)\\e\\ \
-\\e]4;12;$(echo $color12)\\e\\ \
-\\e]4;12;$(echo $color13)\\e\\ \
-\\e]4;12;$(echo $color14)\\e\\ \
-\\e]4;12;$(echo $color15)\\e\\ \
-\\e]10;$(echo $foreground)\\e\\ \
-\\e]11;$(echo $background)\\e\\ \
-\\e]12;$(echo $cursor)\\e\\ \
+	sprintf(p.PRI, "printf %%b \" \
+\\e]4;0;#$(echo $color00)\\e\\ \
+\\e]4;1;#$(echo $color01)\\e\\ \
+\\e]4;2;#$(echo $color02)\\e\\ \
+\\e]4;3;#$(echo $color03)\\e\\ \
+\\e]4;4;#$(echo $color04)\\e\\ \
+\\e]4;5;#$(echo $color05)\\e\\ \
+\\e]4;6;#$(echo $color06)\\e\\ \
+\\e]4;7;#$(echo $color07)\\e\\ \
+\\e]4;8;#$(echo $color08)\\e\\ \
+\\e]4;9;#$(echo $color09)\\e\\ \
+\\e]4;10;#$(echo $color10)\\e\\ \
+\\e]4;11;#$(echo $color11)\\e\\ \
+\\e]4;12;#$(echo $color12)\\e\\ \
+\\e]4;12;#$(echo $color13)\\e\\ \
+\\e]4;12;#$(echo $color14)\\e\\ \
+\\e]4;12;#$(echo $color15)\\e\\ \
+\\e]10;#$(echo $foreground)\\e\\ \
+\\e]11;#$(echo $background)\\e\\ \
+\\e]12;#$(echo $cursor)\\e\\ \
 \" > %s/sequence", p.CONF);
-	printf("%s\n", p.PRI);
 	system(p.PRI);
     sprintf(p.PRI, "printf '%s' > %s/current", p.SEL, p.CONF);
 	system(p.PRI);
-    sprintf(p.PRI, "printf '%s' > /dev/fd/0", p.SEL);
+	sprintf(p.PRI, "cat %s/sequence > /dev/fd/0", p.CONF);
 	system(p.PRI);
-    sprintf(p.PRI, "printf '%s' > /dev/pts/0", p.SEL);
+	sprintf(p.PRI, "cat %s/sequence > /dev/pts/0", p.CONF);
 	system(p.PRI);
 	return 0;
 }
