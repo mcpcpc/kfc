@@ -8,27 +8,18 @@
 int
 find_palettes(void)
 {
-	sprintf(p.SEQ, "/etc/kpal/palettes/%s", p.MODE);
-
-	if ( access(p.SEQ, F_OK) == 0 )
+	if ( access("/etc/kpal/palettes", F_OK) == 0 )
     {
+		strcpy(p.SEQ, "/etc/kpal/palettes");
         return 0;
     }
 
-	sprintf(p.SEQ, "palettes/%s", p.MODE);
-
-    if ( access(p.SEQ, F_OK) == 0 )
+    if ( access("palettes", F_OK) == 0 )
     {
+		strcpy(p.SEQ, "palettes");
         return 0;
     }
 
-	sprintf(p.SEQ, "%s", p.MODE);
-
-    if ( access(p.SEQ, F_OK) == 0 )
-    {
-        return 0;
-    }
-    
     return 1;
 }
 
@@ -37,118 +28,43 @@ select_palette(void)
 {
 	size_t len = 255;
 	char *line = malloc(sizeof(char) * len);
-	int i = 0;
-	char *envvar;
-	strcat(p.SEQ, "/");
-	strcat(p.SEQ, p.SELE);
-	FILE *fp = fopen(p.SEQ, "r");
+	char *envvar, *envval;
+	FILE *fp = fopen(p.SEL, "r");
 	setenv("LC_ALL", "C", 1);
 	system("exec 6>&1 >/dev/null");
 	while(fgets(line, len, fp) != NULL)
 	{
 		envvar = strtok(line, "=");
-
-        if (strcmp(line, "color00") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;0;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color01") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;1;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color02") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;2;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color03") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;3;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color04") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;4;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color05") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;5;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color06") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;6;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color07") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;7;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color08") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;8;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color09") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;9;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color10") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;10;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color11") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;11;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color12") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;12;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color13") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;13;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color14") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;14;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "color15") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;15;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "foreground") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]10;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "background") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]11;#%s\\033\\", envvar);
-		}
-		if (strcmp(line, "cursor") == 0)
-        {
-		    envvar = strtok(NULL, "=");
-		    sprintf(p.CLI, "\\033]4;12;#%s\\033\\", envvar);
-		}
-		strcat(p.PRI, p.CLI);
+		envval = strtok(NULL, "=");
+		setenv(envvar, envval, 1);
 	}
 	fclose(fp);
 	free(line);
-	printf("string: %s", p.PRI);
-    return 0;
+	sprintf(p.PRI, "printf %%b \" \\e]4;0;$(echo $color00)\\e\\ \
+\\e]4;1;$(echo $color01)\\e\\ \
+\\e]4;2;$(echo $color02)\\e\\ \
+\\e]4;3;$(echo $color03)\\e\\ \
+\\e]4;4;$(echo $color04)\\e\\ \
+\\e]4;5;$(echo $color05)\\e\\ \
+\\e]4;6;$(echo $color06)\\e\\ \
+\\e]4;7;$(echo $color07)\\e\\ \
+\\e]4;8;$(echo $color08)\\e\\ \
+\\e]4;9;$(echo $color09)\\e\\ \
+\\e]4;10;$(echo $color10)\\e\\ \
+\\e]4;11;$(echo $color11)\\e\\ \
+\\e]4;12;$(echo $color12)\\e\\ \
+\\e]4;12;$(echo $color13)\\e\\ \
+\\e]4;12;$(echo $color14)\\e\\ \
+\\e]4;12;$(echo $color15)\\e\\ \
+\\e]10;$(echo $foreground)\\e\\ \
+\\e]11;$(echo $background)\\e\\ \
+\\e]12;$(echo $cursor)\\e\\ \
+\" > %s/sequence", p.CONF);
+	printf("%s\n", p.PRI);
+	system(p.PRI);
+    sprintf(p.PRI, "printf '%s' > %s/current", p.SEL, p.CONF);
+	system(p.PRI);
+	return 0;
 }
 
 int
@@ -161,7 +77,7 @@ int
 list_palette(void)
 {
 	struct dirent *de;
-	DIR *dr = opendir(p.SEQ);
+	DIR *dr = opendir(p.SEL);
 
 	if (dr == NULL)
 	{
@@ -181,10 +97,12 @@ list_palette(void)
 int
 print_palette(void)
 {
-	printf("\nUsing: %s\n", p.SEQ);
+	FILE *fp = fopen(p.CONF, "r");
+	fclose(fp);
+	printf("\nUsing: %s\n", p.SEL);
     for (int i = 0; i < 15; i++)
 	{
-		printf("\033[48;5;%dm  \033[0m", i);
+		printf("\e[48;5;%dm  \e[0m", i);
 
 		if (i == 7)
 		{
@@ -206,6 +124,7 @@ main(int argc, char **argv)
         fprintf(stderr, "XDG_CONFIG_HOME not defined\n");
         exit(2);
     }
+	strcat(p.CONF, "/kpal");
     
     if (find_palettes() == 1)
     {
@@ -221,6 +140,7 @@ main(int argc, char **argv)
                 random_palette();
                 break;
             case 'l':
+				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
 				list_palette();
                 break;
             case 'L':
@@ -236,7 +156,7 @@ main(int argc, char **argv)
                 p.errf++;
                 break;
             case 's':
-				p.SELE = optarg;
+				sprintf(p.SEL, "%s/%s/%s", p.SEQ, p.MODE, optarg);
 				select_palette();
 				print_palette();
                 break;

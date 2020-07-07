@@ -1,0 +1,49 @@
+kpal
+
+An on-the-fly palette changer written in c, inspired by Dylan Araps' okpal [0].  
+
+
+BACKGROUND
+----------
+
+This code base is non-functional at this time and will be promoted to release 
+once the following features are implemented:
+
+- [ ] Select palette
+- [ ] Select random palette
+- [x] List all palettes
+- [x] Set light theme
+- [x] Print help/usage.
+- [x] Print Version
+- [x] Print current palette
+- [ ] save new palette to .config/
+
+
+INSTALLATION
+------------
+
+From git source:
+
+$ git clone https://github.com/mcpcpc/kpal.git
+$ cd kpal/
+$ make
+$ make install
+
+
+USAGE
+-----
+
+kpal [-s palette|-L|-r] [l|-v|-p]
+-s palette  Select a palette
+-l          List all palettes
+-p          Print current palette
+-r          Select a random palette
+-L          Set light themes (modifier for -s/-r)
+-h          Show this information
+-v          Show version information
+
+
+REFERENCES
+----------
+[0] https://github.com/dylanaraps/okpal
+[1] https://pubs.opengroup.org/onlinepubs/7908799/xsh/getopt.html
