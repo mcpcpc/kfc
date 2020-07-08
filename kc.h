@@ -2,6 +2,7 @@ struct
 {
     int cval;
     int errf;
+	int randf;
 	FILE *fp;
 	DIR *dr;
 	char *line;

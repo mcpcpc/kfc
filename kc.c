@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <string.h>
 #include "kc.h"
+#include <time.h>
 
 int
 find_palettes(void)
@@ -67,15 +68,7 @@ select_palette(void)
 	fclose(p.fp);
 	sprintf(p.CLI, "%s > /dev/fd/0", p.PRI);
 	system(p.CLI);
-	sprintf(p.CLI, "%s > /dev/pts/0", p.PRI);
-	system(p.CLI);
 	return 0;
-}
-
-int
-random_palette(void)
-{
-    return 0;
 }
 
 int
@@ -97,6 +90,40 @@ list_palette(void)
 
 	closedir(p.dr);
     return 0;
+}
+
+int
+random_palette(void)
+{
+	struct dirent *de;
+	p.dr = opendir(p.SEL);
+	p.randf = 0;
+	if (p.dr == NULL)
+	{
+		printf("Could not open directory");
+		return 1;
+	}
+
+	while((de = readdir(p.dr)) != NULL)
+	{
+		p.randf++;
+	}
+	closedir(p.dr);
+	srand(time(0));
+	int v = (rand() % (p.randf - 2 + 1)) + 2;
+	printf("%d %d\n", v, p.randf);
+	p.randf = 0;
+	p.dr = opendir(p.SEL);
+	while((de = readdir(p.dr)) != NULL)
+	{
+		if (v == p.randf)
+		{
+			strcat(p.SEL, "/");
+			strcat(p.SEL, de->d_name);
+		}
+		p.randf++;
+	}
+	return 0;
 }
 
 int
@@ -151,8 +178,11 @@ main(int argc, char **argv)
         switch (p.cval)
         {
             case 'r':
+				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
                 random_palette();
-                break;
+				select_palette();
+				print_palette();
+				break;
             case 'l':
 				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
 				list_palette();
