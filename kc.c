@@ -111,7 +111,6 @@ random_palette(void)
 	closedir(p.dr);
 	srand(time(0));
 	int v = (rand() % (p.randf - 2 + 1)) + 2;
-	printf("%d %d\n", v, p.randf);
 	p.randf = 0;
 	p.dr = opendir(p.SEL);
 	while((de = readdir(p.dr)) != NULL)
