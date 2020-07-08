@@ -10,12 +10,12 @@ kc: kc.c kc.h Makefile
 
 install: all
 	install -Dm755 kc $(DESTDIR)$(BINDIR)/kc
-	mkdir -p $(DESTDIR)/etc/okpal
-	cp -r palettes $(DESTDIR)/etc/okpal
+	mkdir -p $(DESTDIR)/etc/kc
+	cp -r palettes $(DESTDIR)/etc/kc
 
 uninstall:
 	rm -f $(DESTDIR)$(BINDIR)/kc
-	rm -rf $(DESTDIR)/etc/okpal
+	rm -rf $(DESTDIR)/etc/kc
 
 clean:
 	rm -f kc *.o

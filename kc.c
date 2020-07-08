@@ -40,25 +40,25 @@ select_palette(void)
 	fclose(p.fp);
 	free(p.line);
 	sprintf(p.PRI, "printf %%b \"\
-\\e]4;0;#$(echo $color00)\\e\\ \
-\\e]4;1;#$(echo $color01)\\e\\ \
-\\e]4;2;#$(echo $color02)\\e\\ \
-\\e]4;3;#$(echo $color03)\\e\\ \
-\\e]4;4;#$(echo $color04)\\e\\ \
-\\e]4;5;#$(echo $color05)\\e\\ \
-\\e]4;6;#$(echo $color06)\\e\\ \
-\\e]4;7;#$(echo $color07)\\e\\ \
-\\e]4;8;#$(echo $color08)\\e\\ \
-\\e]4;9;#$(echo $color09)\\e\\ \
-\\e]4;10;#$(echo $color10)\\e\\ \
-\\e]4;11;#$(echo $color11)\\e\\ \
-\\e]4;12;#$(echo $color12)\\e\\ \
-\\e]4;12;#$(echo $color13)\\e\\ \
-\\e]4;12;#$(echo $color14)\\e\\ \
-\\e]4;12;#$(echo $color15)\\e\\ \
-\\e]10;#$(echo $foreground)\\e\\ \
-\\e]11;#$(echo $background)\\e\\ \
-\\e]12;#$(echo $cursor)\\e\\ \"", p.CONF);
+\\033]4;0;#$(echo $color00)\\033\\ \
+\\033]4;1;#$(echo $color01)\\033\\ \
+\\033]4;2;#$(echo $color02)\\033\\ \
+\\033]4;3;#$(echo $color03)\\033\\ \
+\\033]4;4;#$(echo $color04)\\033\\ \
+\\033]4;5;#$(echo $color05)\\033\\ \
+\\033]4;6;#$(echo $color06)\\033\\ \
+\\033]4;7;#$(echo $color07)\\033\\ \
+\\033]4;8;#$(echo $color08)\\033\\ \
+\\033]4;9;#$(echo $color09)\\033\\ \
+\\033]4;10;#$(echo $color10)\\033\\ \
+\\033]4;11;#$(echo $color11)\\033\\ \
+\\033]4;12;#$(echo $color12)\\033\\ \
+\\033]4;12;#$(echo $color13)\\033\\ \
+\\033]4;12;#$(echo $color14)\\033\\ \
+\\033]4;12;#$(echo $color15)\\033\\ \
+\\033]10;#$(echo $foreground)\\033\\ \
+\\033]11;#$(echo $background)\\033\\ \
+\\033]12;#$(echo $cursor)\\033\\ \"", p.CONF);
 	p.fp = fopen(p.CSEQ, "w");
 	fprintf(p.fp, "%s", p.PRI);
 	fclose(p.fp);
@@ -110,7 +110,7 @@ print_palette(void)
 	fclose(p.fp);
     for (int i = 0; i < 15; i++)
 	{
-		printf("\e[48;5;%dm  \e[0m", i);
+		printf("\033[48;5;%dm  \033[0m", i);
 
 		if (i == 7)
 		{
