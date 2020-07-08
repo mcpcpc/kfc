@@ -150,6 +150,11 @@ print_palette(void)
 int
 main(int argc, char **argv)
 {
+    if (argc == 1)
+	{
+        fprintf(stderr, "No argumemts provided\n");
+        exit(2);
+	}
 	extern char *optarg;
 	extern int optind, optopt;
 	p.MODE = "dark";
