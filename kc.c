@@ -27,19 +27,18 @@ find_palettes(void)
 int
 select_palette(void)
 {
-//	size_t len = 255;
 	p.len = 255;
-	char *line = malloc(sizeof(char) * p.len);
+	p.line = malloc(sizeof(char) * p.len);
 	char *envvar, *envval;
 	p.fp = fopen(p.SEL, "r");
-	while(fgets(line, p.len, p.fp) != NULL)
+	while(fgets(p.line, p.len, p.fp) != NULL)
 	{
-		envvar = strtok(line, "=");
+		envvar = strtok(p.line, "=");
 		envval = strtok(NULL, "=");
 		setenv(envvar, envval, 1);
 	}
 	fclose(p.fp);
-	free(line);
+	free(p.line);
 	sprintf(p.PRI, "printf %%b \"\
 \\e]4;0;#$(echo $color00)\\e\\ \
 \\e]4;1;#$(echo $color01)\\e\\ \
@@ -103,10 +102,11 @@ list_palette(void)
 int
 print_palette(void)
 {
-    char str[60];
+	p.len = 255;
+	p.line = malloc(sizeof(char) * p.len);
     p.fp = fopen(p.CCUR, "r");
-	fgets(str, 60, p.fp);
-	printf("\nUsing: %s\n", str);
+	fgets(p.line,p.len, p.fp);
+	printf("\nUsing: %s\n", p.line);
 	fclose(p.fp);
     for (int i = 0; i < 15; i++)
 	{

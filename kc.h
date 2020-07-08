@@ -4,6 +4,7 @@ struct
     int errf;
 	FILE *fp;
 	DIR *dr;
+	char *line;
 	size_t len;
 	char *MODE; // "light" or "dark"
     char *CONF; // configuration path
