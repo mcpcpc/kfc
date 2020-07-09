@@ -14,7 +14,7 @@ time:
 - simple terminal, st [2] 
 
 As there are no other dependєncies, other than a C compiler, this program should
-work on other OS distributions.
+work on distributions other than KISS Linux as well.
 
 
 INSTALLATION
