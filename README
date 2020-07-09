@@ -7,7 +7,7 @@ for KISS Linux.
 BACKGROUND
 ----------
 
-This project was inspired by Dylan Arap's POSIX shell, okpal [0]d.  Compatibility 
+This project was inspired by Dylan Arap's POSIX shell, okpal [0]d. Compatibility 
 with the following terminator emulators on KISS Linux have been tested at this 
 time:
 
@@ -15,6 +15,9 @@ time:
 
 As there are no other dependєncies, other than a C compiler (gcc), this program 
 should work on distributions other than KISS Linux as well.
+
+Note: The code is quite "ugly" at this time and will addressed in future 
+      iterations.
 
 
 INSTALLATION
