@@ -76,8 +76,6 @@ select_palette(void)
 	fclose(p.fp);
 	sprintf(p.CLI, "%s > /dev/fd/0", p.PRI);
 	system(p.CLI);
-	sprintf(p.CLI, "%s > /dev/pts/%ѕ", p.PRI, 2);
-	system(p.CLI);
 	return 0;
 }
 
