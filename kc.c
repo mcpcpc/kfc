@@ -202,7 +202,7 @@ main(int argc, char **argv)
                 p.MODE = "light";
                 break;
             case 'v':
-                printf("0.0.1\n");
+                printf("0.0.2\n");
                 break;
             case 'h':
                 p.errf++;
