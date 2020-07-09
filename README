@@ -1,29 +1,36 @@
 kc
 
-KISS colors, a global terminal-emulator color palette setter written in C and designed for 
-KISS Linux.
+KISS colors, a terminal-emulator color palette setter written in C and designed 
+for KISS Linux.
 
 
 BACKGROUND
 ----------
 
-This project was inspired by Dylan Arap's POSIX shell okpal [0]. This code base 
-is "mostly" functional at this time and will be promoted to release once known 
-bugs have been closed.  Compatibility with the following terminator-emulators
-has been tested (with more to come):
+This project was inspired by Dylan Arap's POSIX shell 'okpal' [0]. Compatibility 
+with the following terminator-emulators on KISS Linux have been tested at this 
+time:
 
-- simple terminal, st [2]
+- simple terminal, st [2] 
+
+As there are no other dependєncies, other than a C compiler, this program should
+work on other OS distributions.
 
 
 INSTALLATION
 ------------
 
-For kc to work, XDG_CONFIG_HOME environment variable must be defined.
+Building and installing from source:
 
 $ git clone https://github.com/mcpcpc/kc.git
 $ cd kc/
 $ make
 $ make install
+
+
+Installing on KISS Linux:
+
+$ kiss b kc && kiss i kc
 
 
 USAGE
@@ -39,7 +46,16 @@ kc [-s palette|-L|-r] [l|-v|-p]
 -v          Show version information
 
 
+NEW PALETTES
+------------
+
+Users can contribute their own custom color palettes by creating a Pull Request.
+
+
 REFERENCES
 ----------
 [0] https://github.com/dylanaraps/okpal
 [1] https://pubs.opengroup.org/onlinepubs/7908799/xsh/getopt.html
+[2] Note that background, foreground and cursor color setting does not work
+    without applying the 'OSC 10 11 12' patch.
+	https://st.suckless.org

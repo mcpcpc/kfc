@@ -1,11 +1,12 @@
-#include <sys/stat.h>
+#include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <dirent.h>
 #include <string.h>
-#include "kc.h"
+#include <sys/stat.h>
 #include <time.h>
+#include <unistd.h>
+
+#include "kc.h"
 
 int
 find_palettes(void)
@@ -32,6 +33,13 @@ select_palette(void)
 	p.line = malloc(sizeof(char) * p.len);
 	char *envvar, *envval;
 	p.fp = fopen(p.SEL, "r");
+
+	if (p.fp == NULL)
+	{
+		fprintf(stderr, "Selected palette does not exist. Do nothing\n");
+		return 1;
+	}
+
 	while(fgets(p.line, p.len, p.fp) != NULL)
 	{
 		envvar = strtok(p.line, "=");
@@ -67,6 +75,8 @@ select_palette(void)
 	fprintf(p.fp, "%s", p.SEL);
 	fclose(p.fp);
 	sprintf(p.CLI, "%s > /dev/fd/0", p.PRI);
+	system(p.CLI);
+	sprintf(p.CLI, "%s > /dev/pts/%ѕ", p.PRI, 2);
 	system(p.CLI);
 	return 0;
 }
@@ -110,12 +120,12 @@ random_palette(void)
 	}
 	closedir(p.dr);
 	srand(time(0));
-	int v = (rand() % (p.randf - 2 + 1)) + 2;
+	p.i = (rand() % (p.randf - 2 + 1)) + 2;
 	p.randf = 0;
 	p.dr = opendir(p.SEL);
 	while((de = readdir(p.dr)) != NULL)
 	{
-		if (v == p.randf)
+		if (p.i == p.randf)
 		{
 			strcat(p.SEL, "/");
 			strcat(p.SEL, de->d_name);
@@ -134,11 +144,11 @@ print_palette(void)
 	fgets(p.line,p.len, p.fp);
 	printf("\nUsing: %s\n", p.line);
 	fclose(p.fp);
-    for (int i = 0; i < 15; i++)
+    for (p.i  = 0; p.i < 15; p.i++)
 	{
-		printf("\033[48;5;%dm  \033[0m", i);
+		printf("\033[48;5;%dm  \033[0m", p.i);
 
-		if (i == 7)
+		if (p.i == 7)
 		{
 			printf("\n");
 		}
@@ -185,7 +195,6 @@ main(int argc, char **argv)
 				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
                 random_palette();
 				select_palette();
-				print_palette();
 				break;
             case 'l':
 				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
@@ -194,9 +203,6 @@ main(int argc, char **argv)
             case 'L':
                 p.MODE = "light";
                 break;
-            case 'p':
-				print_palette();
-				break;
             case 'v':
                 printf("0.0.1\n");
                 break;
@@ -206,8 +212,10 @@ main(int argc, char **argv)
             case 's':
 				sprintf(p.SEL, "%s/%s/%s", p.SEQ, p.MODE, optarg);
 				select_palette();
-				print_palette();
                 break;
+            case 'p':
+				print_palette();
+				break;
             case ':':
                 fprintf(stderr, "Option -%c requires an operand\n", optopt);
                 p.errf++;

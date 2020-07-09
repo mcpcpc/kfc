@@ -1,6 +1,7 @@
 struct
 {
-    int cval;
+	int i;
+	int cval;
     int errf;
 	int randf;
 	FILE *fp;
