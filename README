@@ -7,9 +7,9 @@ for KISS Linux.
 BACKGROUND
 ----------
 
-This project was inspired by Dylan Arap's POSIX shell, okpal [0], and designed 
-with execution time in mind.  Compatibility with the following terminator 
-emulators on KISS Linux have been tested at this time:
+This project was inspired by Dylan Arap's POSIX shell, okpal [0]d.  Compatibility 
+with the following terminator emulators on KISS Linux have been tested at this 
+time:
 
 - simple terminal, st [2] 
 
