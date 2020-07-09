@@ -7,7 +7,7 @@ for KISS Linux.
 BACKGROUND
 ----------
 
-This project was inspired by Dylan Arap's POSIX shell, okpal [0]. This
+This project was inspired by Dylan Arap's POSIX shell script, okpal [0]. This
 application has similar functionality to okpal but is designed with execution
 speed in mind. Compatibility with the following terminator emulators on KISS 
 Linux have been tested at this time:
