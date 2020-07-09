@@ -17,8 +17,8 @@ Linux have been tested at this time:
 As there are no other dependєncies, other than a C compiler (gcc), this program 
 should work on distributions other than KISS Linux as well.
 
-I appologize for the "ugliness" of the code at this time.  I hope to address 
-this in future iterations.
+I apologize for the "ugliness" of the code at this time. I hope to address this 
+in future iterations.
 
 
 INSTALLATION
