@@ -67,14 +67,14 @@ select_palette(void)
 \\033]4;12;#$(echo $color15)\\033\\ \
 \\033]10;#$(echo $foreground)\\033\\ \
 \\033]11;#$(echo $background)\\033\\ \
-\\033]12;#$(echo $cursor)\\033\\ \"", p.CONF);
+\\033]12;#$(echo $cursor)\\033\\ \" \033[21D", p.CONF);
 	p.fp = fopen(p.CSEQ, "w");
 	fprintf(p.fp, "%s", p.PRI);
 	fclose(p.fp);
 	p.fp = fopen(p.CCUR, "w");
 	fprintf(p.fp, "%s", p.SEL);
 	fclose(p.fp);
-	sprintf(p.CLI, "%s > /dev/fd/0", p.PRI);
+	sprintf(p.CLI, "%s", p.PRI);
 	system(p.CLI);
 	return 0;
 }
