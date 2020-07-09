@@ -58,4 +58,4 @@ REFERENCES
 [1] https://pubs.opengroup.org/onlinepubs/7908799/xsh/getopt.html
 [2] Note that background, foreground and cursor color setting does not work
     without applying the 'OSC 10 11 12' patch.
-	https://st.suckless.org
+    https://st.suckless.org
