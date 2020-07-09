@@ -1,21 +1,24 @@
 kc
 
-KISS colors, an on-the-fly color palette changer written in C and designed for 
+KISS colors, a global terminal-emulator color palette setter written in C and designed for 
 KISS Linux.
 
 
 BACKGROUND
 ----------
 
-This project was inspired by Dylan Arap's okpal [0] palette changer. This code 
-base is "mostly" functional at this time and will be promoted to release once 
-known bugs have been closed.
+This project was inspired by Dylan Arap's POSIX shell okpal [0]. This code base 
+is "mostly" functional at this time and will be promoted to release once known 
+bugs have been closed.  Compatibility with the following terminator-emulators
+has been tested (with more to come):
+
+- simple terminal, st [2]
 
 
 INSTALLATION
 ------------
 
-From git source:
+For kc to work, XDG_CONFIG_HOME environment variable must be defined.
 
 $ git clone https://github.com/mcpcpc/kc.git
 $ cd kc/
