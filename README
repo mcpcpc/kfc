@@ -14,10 +14,11 @@ Linux have been tested at this time:
 
 - simple terminal, st [2] 
 
-Other than a terminal emulator and C compiler (e.g. gcc), KISS Colors has no other dependencies.
+Other than a terminal emulator and C compiler (e.g. gcc), KISS Colors has no 
+other dependencies.
 
-Note: I apologize for the "ugliness" of the code at this time. I hope to address this 
-in future commits.
+Note: I apologize for the "ugliness" of the code at this time. I hope to address
+this in future commits.
 
 
 INSTALLATION

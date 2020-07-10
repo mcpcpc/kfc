@@ -12,9 +12,9 @@
 int
 find_palettes(void)
 {
-	if ( access("/etc/kc/palettes", F_OK) == 0 )
+	if ( access("/usr/share/kc/palettes", F_OK) == 0 )
     {
-		strcpy(p.SEQ, "/etc/kc/palettes");
+		strcpy(p.SEQ, "/usr/share/kc/palettes");
         return 0;
     }
 
