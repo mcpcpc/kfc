@@ -37,7 +37,7 @@ select_palette(void)
 
 	if (p.fp == NULL)
 	{
-		fprintf(stderr, "Selected palette does not exist. Do nothing\n");
+		fprintf(stderr, "Selected palette does not exist.\n");
 		return 1;
 	}
 
@@ -203,7 +203,7 @@ main(int argc, char **argv)
                 p.MODE = "light";
                 break;
             case 'v':
-                printf("0.0.5\n");
+                printf("0.0.6\n");
                 break;
             case 'h':
                 p.errf++;
