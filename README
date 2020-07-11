@@ -1,6 +1,6 @@
-kc
+kfc
 
-KISS colors, a terminal-emulator color palette setter written in C and designed 
+kiss for colors, a terminal-emulator color palette setter written in C and designed 
 for KISS Linux.
 
 
@@ -14,7 +14,7 @@ Linux have been tested at this time:
 
 - simple terminal, st [2] 
 
-Other than a terminal emulator and C compiler (e.g. gcc), KISS Colors has no 
+Other than a terminal emulator and C compiler (e.g. gcc), the application has no 
 other dependencies.
 
 Note: I apologize for the "ugliness" of the code at this time. I hope to address
@@ -26,21 +26,21 @@ INSTALLATION
 
 Building and installing from source:
 
-$ git clone https://github.com/mcpcpc/kc.git
-$ cd kc/
+$ git clone https://github.com/mcpcpc/kfc.git
+$ cd kfc/
 $ make
 $ make install
 
 
 Installing on KISS Linux:
 
-$ kiss b kc && kiss i kc
+$ kiss b kfc && kiss i kfc
 
 
 USAGE
 -----
 
-kc [-s palette|-L|-r] [l|-v|-p]
+kfc [-s palette|-L|-r] [l|-v|-p]
 -s palette  Select a palette
 -l          List all palettes
 -p          Print current palette

@@ -6,15 +6,15 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <unistd.h>
-#include "kc.h"
+#include "kfc.h"
 
 
 int
 find_palettes(void)
 {
-	if ( access("/usr/share/kc/palettes", F_OK) == 0 )
+	if ( access("/usr/share/kfc/palettes", F_OK) == 0 )
     {
-		strcpy(p.SEQ, "/usr/share/kc/palettes");
+		strcpy(p.SEQ, "/usr/share/kfc/palettes");
         return 0;
     }
 
@@ -172,10 +172,10 @@ main(int argc, char **argv)
         fprintf(stderr, "XDG_CONFIG_HOME not defined\n");
         exit(2);
     }
-	strcat(p.CONF, "/kc");
+	strcat(p.CONF, "/kfc");
 	if ( mkdir(p.CONF,0777) == 0 )
 	{
-		printf("Created 'kc' directory in XDG_CONFIG_HOME.");
+		printf("Created 'kfc' directory in XDG_CONFIG_HOME.");
 	}
 	sprintf(p.CCUR, "%s/current", p.CONF);
 	sprintf(p.CSEQ, "%s/sequence", p.CONF);
@@ -203,7 +203,7 @@ main(int argc, char **argv)
                 p.MODE = "light";
                 break;
             case 'v':
-                printf("0.0.6\n");
+                printf("0.0.7\n");
                 break;
             case 'h':
                 p.errf++;
@@ -227,7 +227,7 @@ main(int argc, char **argv)
     if (p.errf)
     {
         fprintf(stderr, "\
-usage: kc [-s palette|-r|-L] [l|-v|-p]\n \
+usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
 -s palette  Select a palette\n \
 -l          List all palettes\n \
 -p          Print current palette\n \

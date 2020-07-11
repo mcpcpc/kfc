@@ -3,21 +3,21 @@ PREFIX ?= /usr
 BINDIR ?= $(PREFIX)/bin
 CC     ?= gcc
 
-all: kc
+all: kfc
 
-kc: kc.c kc.h Makefile
+kfc: kfc.c kfc.h Makefile
 	$(CC) -O3 $(CFLAGS) -o $@ $< -lX11 $(LDFLAGS)
 
 install: all
-	install -Dm755 kc $(DESTDIR)$(BINDIR)/kc
-	mkdir -p $(DESTDIR)/usr/share/kc
-	cp -r palettes $(DESTDIR)/usr/share/kc
+	install -Dm755 kfc $(DESTDIR)$(BINDIR)/kfc
+	mkdir -p $(DESTDIR)/usr/share/kfc
+	cp -r palettes $(DESTDIR)/usr/share/kfc
 
 uninstall:
-	rm -f $(DESTDIR)$(BINDIR)/kc
-	rm -rf $(DESTDIR)/usr/share/kc
+	rm -f $(DESTDIR)$(BINDIR)/kfc
+	rm -rf $(DESTDIR)/usr/share/kfc
 
 clean:
-	rm -f kc *.o
+	rm -f kfc *.o
 
 .PHONY: all install uninstall clean
