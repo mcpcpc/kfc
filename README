@@ -13,6 +13,7 @@ speed in mind. Compatibility with the following terminator emulators on KISS
 Linux have been tested at this time:
 
 - simple terminal, st [2] 
+- alacritty [3]
 
 Other than a terminal emulator and C compiler (e.g. gcc), the application has no 
 other dependencies.
@@ -63,3 +64,5 @@ REFERENCES
 [2] Note that background, foreground and cursor color setting does not work
     without applying the 'OSC 10 11 12' patch.
     https://st.suckless.org
+[3] Confirmed to work in wayland per sdsddsd1.
+    https://github.com/mcpcpc/kfc/issues/1#issuecomment-657241830
