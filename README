@@ -9,7 +9,7 @@ BACKGROUND
 
 This project was inspired by Dylan Arap's POSIX shell script, okpal [0]. This
 application has similar functionality to okpal but is designed with execution
-speed in mind. There are currently >250 light and dark palettes offered at 
+speed in mind. There are currently >280 light and dark palettes offered at 
 this time within this package (with more to come).  
 
 
