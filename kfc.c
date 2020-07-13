@@ -164,6 +164,7 @@ main(int argc, char **argv)
         fprintf(stderr, "No argumemts provided\n");
         exit(2);
 	}
+	
 	extern char *optarg;
 	extern int optind, optopt;
 	p.MODE = "dark";
@@ -173,13 +174,14 @@ main(int argc, char **argv)
         exit(2);
     }
 	strcat(p.CONF, "/kfc");
+	sprintf(p.CCUR, "%s/current", p.CONF);
+	sprintf(p.CSEQ, "%s/sequence", p.CONF);
+	
 	if ( mkdir(p.CONF,0777) == 0 )
 	{
 		printf("Created 'kfc' directory in XDG_CONFIG_HOME.");
 	}
-	sprintf(p.CCUR, "%s/current", p.CONF);
-	sprintf(p.CSEQ, "%s/sequence", p.CONF);
-
+	
     if (find_palettes() == 1)
     {
         fprintf(stderr, "Palette directory not found\n");
