@@ -17,3 +17,5 @@ struct
     char PRI[1025];
 	char CLI[1025];
 } p;
+
+struct dirent *de;

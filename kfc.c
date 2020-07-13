@@ -84,7 +84,6 @@ select_palette(void)
 int
 list_palette(void)
 {
-	struct dirent *de;
 	p.dr = opendir(p.SEL);
 
 	if (p.dr == NULL)
@@ -105,7 +104,6 @@ list_palette(void)
 int
 random_palette(void)
 {
-	struct dirent *de;
 	p.dr = opendir(p.SEL);
 	p.randf = 0;
 
