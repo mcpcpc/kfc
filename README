@@ -32,7 +32,6 @@ $ cd kfc/
 $ make
 $ make install
 
-
 Installing on KISS Linux:
 
 $ kiss b kfc && kiss i kfc
