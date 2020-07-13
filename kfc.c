@@ -1,12 +1,12 @@
 #include <dirent.h>
 #include <getopt.h>
-#include "kfc.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
 #include <unistd.h>
+#include "kfc.h"
 
 
 int
@@ -68,7 +68,7 @@ select_palette(void)
 \\033]4;12;#$(echo $color15)\\033\\ \
 \\033]10;#$(echo $foreground)\\033\\ \
 \\033]11;#$(echo $background)\\033\\ \
-\\033]12;#$(echo $cursor)\\033\\ \" \033[21D", p.CONF);
+\\033]12;#$(echo $cursor)\\033\\ \" \033[21D");
 	p.fp = fopen(p.CSEQ, "w");
 	fprintf(p.fp, "%s", p.PRI);
 	fclose(p.fp);
@@ -88,7 +88,7 @@ list_palette(void)
 
 	if (p.dr == NULL)
 	{
-		fprintf(stderr, "Could not open directory");
+		printf("Could not open directory");
 		return 1;
 	}
 
@@ -109,7 +109,7 @@ random_palette(void)
 	p.randf = 0;
 	if (p.dr == NULL)
 	{
-		fprintf(stderr, "Could not open directory");
+		printf("Could not open directory");
 		return 1;
 	}
 
