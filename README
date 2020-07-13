@@ -66,7 +66,8 @@ EXAMPLES
 NEW PALETTES
 ------------
 
-Users can contribute their own custom color palettes by creating a Pull Request.
+Users can contribute their own custom color palettes (using the supplied template
+in the docs/ folder) by creating a Pull Request.
 
 
 REFERENCES
