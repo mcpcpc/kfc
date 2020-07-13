@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <dirent.h>
 #include <getopt.h>
 #include <stdio.h>
@@ -7,7 +8,6 @@
 #include <time.h>
 #include <unistd.h>
 #include "kfc.h"
-
 
 int
 find_palettes(void)
@@ -88,7 +88,7 @@ list_palette(void)
 
 	if (p.dr == NULL)
 	{
-		printf("Could not open directory");
+		fprintf(stderr, "Could not open directory\n");
 		return 1;
 	}
 
@@ -109,7 +109,7 @@ random_palette(void)
 	p.randf = 0;
 	if (p.dr == NULL)
 	{
-		printf("Could not open directory");
+		fprintf(stderr, "Could not open directory\n");
 		return 1;
 	}
 
@@ -174,12 +174,12 @@ main(int argc, char **argv)
         exit(2);
     }
 	strcat(p.CONF, "/kfc");
-	sprintf(p.CCUR, "%s/current", p.CONF);
-	sprintf(p.CSEQ, "%s/sequence", p.CONF);
+	snprintf(p.CCUR, sizeof(p.CCUR), "%s/current", p.CONF);
+	snprintf(p.CSEQ, sizeof(p.CSEQ), "%s/sequence", p.CONF);
 	
 	if ( mkdir(p.CONF,0777) == 0 )
 	{
-		printf("Created 'kfc' directory in XDG_CONFIG_HOME.");
+		puts("Created 'kfc' directory in XDG_CONFIG_HOME.");
 	}
 	
     if (find_palettes() == 1)
@@ -193,12 +193,12 @@ main(int argc, char **argv)
         switch (p.cval)
         {
             case 'r':
-				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
+				snprintf(p.SEL, sizeof(p.SEL), "%s/%s", p.SEQ, p.MODE);
                 random_palette();
 				select_palette();
 				break;
             case 'l':
-				sprintf(p.SEL, "%s/%s", p.SEQ, p.MODE);
+				snprintf(p.SEL, sizeof(p.SEL), "%s/%s", p.SEQ, p.MODE);
 				list_palette();
                 break;
             case 'L':
@@ -211,7 +211,7 @@ main(int argc, char **argv)
                 p.errf++;
                 break;
             case 's':
-				sprintf(p.SEL, "%s/%s/%s", p.SEQ, p.MODE, optarg);
+				snprintf(p.SEL, sizeof(p.SEL), "%s/%s/%s", p.SEQ, p.MODE, optarg);
 				select_palette();
                 break;
             case 'p':
