@@ -9,14 +9,8 @@ BACKGROUND
 
 This project was inspired by Dylan Arap's POSIX shell script, okpal [0]. This
 application has similar functionality to okpal but is designed with execution
-speed in mind. There are currently over 250 light and dark palettes offered at 
-this time.  
-
-Compatibility with the following terminator emulators on KISS Linux have been 
-tested at this time:
-
-- simple terminal, st [2] 
-- alacritty [3]
+speed in mind. There are currently >250 light and dark palettes offered at 
+this time within this package (with more to come).  
 
 
 INSTALLATION
@@ -35,6 +29,12 @@ no other dependencies.
 - Installing on KISS Linux:
 
   $ kiss b kfc && kiss i kfc
+
+Compatibility with the following terminator emulators on KISS Linux have been 
+tested:
+
+- simple terminal, st [2] 
+- alacritty [3]
 
 
 USAGE
