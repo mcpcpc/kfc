@@ -2,7 +2,7 @@ struct
 {
 	int i;
 	int cval;
-    int errf;
+    int flag;
 	int randf;
 	FILE *fp;
 	DIR *dr;

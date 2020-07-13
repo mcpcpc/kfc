@@ -47,6 +47,7 @@ select_palette(void)
 		envval = strtok(NULL, "=");
 		setenv(envvar, envval, 1);
 	}
+
 	fclose(p.fp);
 	free(p.line);
 	sprintf(p.PRI, "printf %%b \"\
@@ -92,7 +93,7 @@ list_palette(void)
 		return 1;
 	}
 
-	while((de = readdir(p.dr)) != NULL)
+	while( (de = readdir(p.dr)) != NULL )
 	{
 		puts(de->d_name);
 	}
@@ -107,22 +108,24 @@ random_palette(void)
 	struct dirent *de;
 	p.dr = opendir(p.SEL);
 	p.randf = 0;
+
 	if (p.dr == NULL)
 	{
 		fprintf(stderr, "Could not open directory\n");
 		return 1;
 	}
 
-	while((de = readdir(p.dr)) != NULL)
+	while( (de = readdir(p.dr)) != NULL )
 	{
 		p.randf++;
 	}
+
 	closedir(p.dr);
 	srand(time(0));
 	p.i = (rand() % (p.randf - 2 + 1)) + 2;
 	p.randf = 0;
 	p.dr = opendir(p.SEL);
-	while((de = readdir(p.dr)) != NULL)
+	while(( de = readdir(p.dr)) != NULL )
 	{
 		if (p.i == p.randf)
 		{
@@ -140,9 +143,16 @@ print_palette(void)
 	p.len = 255;
 	p.line = malloc(sizeof(char) * p.len);
     p.fp = fopen(p.CCUR, "r");
+
+	if (p.fp == NULL)
+	{
+		fprintf(stderr, "No palette set or 'current' file missing\n");
+		return 1;
+	}
 	fgets(p.line,p.len, p.fp);
 	puts(p.line);
 	fclose(p.fp);
+
     for (p.i  = 0; p.i < 15; p.i++)
 	{
 		printf("\033[48;5;%dm  \033[0m", p.i);
@@ -152,6 +162,7 @@ print_palette(void)
 			printf("\n");
 		}
 	}
+
 	printf("\n");
 	return 0;
 }
@@ -168,19 +179,22 @@ main(int argc, char **argv)
 	extern char *optarg;
 	extern int optind, optopt;
 	p.MODE = "dark";
+
 	if ( (p.CONF = getenv("XDG_CONFIG_HOME")) == NULL )
     {
         fprintf(stderr, "XDG_CONFIG_HOME not defined\n");
         exit(2);
     }
+
 	strcat(p.CONF, "/kfc");
-	snprintf(p.CCUR, sizeof(p.CCUR), "%s/current", p.CONF);
-	snprintf(p.CSEQ, sizeof(p.CSEQ), "%s/sequence", p.CONF);
 	
 	if ( mkdir(p.CONF,0777) == 0 )
 	{
 		puts("Created 'kfc' directory in XDG_CONFIG_HOME.");
 	}
+
+	snprintf(p.CCUR, sizeof(p.CCUR), "%s/current", p.CONF);
+	snprintf(p.CSEQ, sizeof(p.CSEQ), "%s/sequence", p.CONF);
 	
     if (find_palettes() == 1)
     {
@@ -188,7 +202,7 @@ main(int argc, char **argv)
         exit(2);
     }
 
-    while ( ( p.cval = getopt(argc, argv, "rlLpvhs:" )) != -1 )
+    while ( ( p.cval = getopt(argc, argv, "rlLpvhs:" ) ) != -1 )
     {
         switch (p.cval)
         {
@@ -205,10 +219,10 @@ main(int argc, char **argv)
                 p.MODE = "light";
                 break;
             case 'v':
-                printf("0.0.7\n");
+                printf("0.0.8\n");
                 break;
             case 'h':
-                p.errf++;
+                p.flag++;
                 break;
             case 's':
 				snprintf(p.SEL, sizeof(p.SEL), "%s/%s/%s", p.SEQ, p.MODE, optarg);
@@ -219,16 +233,16 @@ main(int argc, char **argv)
 				break;
             case ':':
                 fprintf(stderr, "Option -%c requires an operand\n", optopt);
-                p.errf++;
+                p.flag++;
                 break;
             case '?':
                 fprintf(stderr, "Unrecognized option: -%c\n", optopt);
-                p.errf++;
+                p.flag++;
         }
     }
-    if (p.errf)
+    if (p.flag)
     {
-        fprintf(stderr, "\
+        printf("\
 usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
 -s palette  Select a palette\n \
 -l          List all palettes\n \
@@ -237,7 +251,6 @@ usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
 -L          Set light themes (modifier for -s/-r)\n \
 -h          Show this information\n \
 -v          Show version information\n");
-            exit(2);
     }
     return 0;
 }
