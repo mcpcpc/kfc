@@ -58,7 +58,7 @@ EXAMPLES
   the following line to one of your system startup files (e.g ~/.profile,
   ~/.ashrc or ~/.bashrc):
   
-  $ [ -x "$(command -v kfc)" ] && kfc -s PALETTE
+      [ -x "$(command -v kfc)" ] && kfc -s PALETTE
   
   Remember to replace PALETTE in the line above with your preferred color 
   palette.
