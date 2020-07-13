@@ -1,12 +1,12 @@
 #include <dirent.h>
 #include <getopt.h>
+#include "kfc.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
 #include <unistd.h>
-#include "kfc.h"
 
 
 int
@@ -88,13 +88,13 @@ list_palette(void)
 
 	if (p.dr == NULL)
 	{
-		printf("Could not open directory");
+		fprintf(stderr, "Could not open directory");
 		return 1;
 	}
 
 	while((de = readdir(p.dr)) != NULL)
 	{
-		printf("%s\n", de->d_name);
+		puts(de->d_name);
 	}
 
 	closedir(p.dr);
@@ -109,7 +109,7 @@ random_palette(void)
 	p.randf = 0;
 	if (p.dr == NULL)
 	{
-		printf("Could not open directory");
+		fprintf(stderr, "Could not open directory");
 		return 1;
 	}
 
@@ -141,7 +141,7 @@ print_palette(void)
 	p.line = malloc(sizeof(char) * p.len);
     p.fp = fopen(p.CCUR, "r");
 	fgets(p.line,p.len, p.fp);
-	printf("\nUsing: %s\n", p.line);
+	puts(p.line);
 	fclose(p.fp);
     for (p.i  = 0; p.i < 15; p.i++)
 	{
@@ -152,7 +152,7 @@ print_palette(void)
 			printf("\n");
 		}
 	}
-	printf("\n\n");
+	printf("\n");
 	return 0;
 }
 
