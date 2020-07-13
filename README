@@ -9,32 +9,32 @@ BACKGROUND
 
 This project was inspired by Dylan Arap's POSIX shell script, okpal [0]. This
 application has similar functionality to okpal but is designed with execution
-speed in mind. Compatibility with the following terminator emulators on KISS 
-Linux have been tested at this time:
+speed in mind. There are currently over 250 light and dark palettes offered at 
+this time.  
+
+Compatibility with the following terminator emulators on KISS Linux have been 
+tested at this time:
 
 - simple terminal, st [2] 
 - alacritty [3]
-
-Other than a terminal emulator and C compiler (e.g. gcc), the application has no 
-other dependencies.
-
-Note: I apologize for the "ugliness" of the code at this time. I hope to address
-this in future commits.
 
 
 INSTALLATION
 ------------
 
-Building and installing from source:
+Other than a terminal emulator and C compiler (e.g. gcc), the application has 
+no other dependencies.
 
-$ git clone https://github.com/mcpcpc/kfc.git
-$ cd kfc/
-$ make
-$ make install
+- Building and installing from source:
 
-Installing on KISS Linux:
+  $ git clone https://github.com/mcpcpc/kfc.git
+  $ cd kfc/
+  $ make
+  $ make install
 
-$ kiss b kfc && kiss i kfc
+- Installing on KISS Linux:
+
+  $ kiss b kfc && kiss i kfc
 
 
 USAGE
