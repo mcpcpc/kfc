@@ -94,7 +94,7 @@ list_palette(void)
 
 	while((de = readdir(p.dr)) != NULL)
 	{
-		printf("->%s\n", de->d_name);
+		printf("%s\n", de->d_name);
 	}
 
 	closedir(p.dr);
