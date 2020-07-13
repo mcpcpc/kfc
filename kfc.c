@@ -32,7 +32,6 @@ select_palette(void)
 {
 	p.len = 255;
 	p.line = malloc(sizeof(char) * p.len);
-	char *envvar, *envval;
 	p.fp = fopen(p.SEL, "r");
 
 	if (p.fp == NULL)
@@ -43,9 +42,9 @@ select_palette(void)
 
 	while(fgets(p.line, p.len, p.fp) != NULL)
 	{
-		envvar = strtok(p.line, "=");
-		envval = strtok(NULL, "=");
-		setenv(envvar, envval, 1);
+		p.EVAR = strtok(p.line, "=");
+		p.EVAL = strtok(NULL, "=");
+		setenv(p.EVAR, p.EVAL, 1);
 	}
 
 	fclose(p.fp);
@@ -150,6 +149,7 @@ print_palette(void)
 	fgets(p.line,p.len, p.fp);
 	puts(p.line);
 	fclose(p.fp);
+	free(p.line);
 
     for (p.i  = 0; p.i < 15; p.i++)
 	{
@@ -220,7 +220,7 @@ main(int argc, char **argv)
                 printf("0.0.8\n");
                 break;
             case 'h':
-                p.flag++;
+                p.FLAG++;
                 break;
             case 's':
 				snprintf(p.SEL, sizeof(p.SEL), "%s/%s/%s", p.SEQ, p.MODE, optarg);
@@ -231,14 +231,14 @@ main(int argc, char **argv)
 				break;
             case ':':
                 fprintf(stderr, "Option -%c requires an operand\n", optopt);
-                p.flag++;
+                p.FLAG++;
                 break;
             case '?':
                 fprintf(stderr, "Unrecognized option: -%c\n", optopt);
-                p.flag++;
+                p.FLAG++;
         }
     }
-    if (p.flag)
+    if (p.FLAG)
     {
         printf("\
 usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
