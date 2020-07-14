@@ -12,8 +12,8 @@ utilizes 16 ANSI colors to control the color scheme of existing terminal-emulato
 windows. This allows one to achieve consistent colors across all terminal 
 utilities and applications. This application has similar functionality to okpal 
 but is designed with execution speed in mind. There are currently 295 light and 
-dark palettes offered at this time that can be applied and quickly swapped out
-for others.  
+dark color palettes offered at this time that can be applied and quickly swapped 
+out for others.  
 
 
 COMPATIBILITY
@@ -65,7 +65,7 @@ EXAMPLES
 --------
 
 For the following examples, remember to replace PALETTE with your preferred 
-color palette. 
+color schema name. 
 
 - To see if a specific light color palette is available:
 
