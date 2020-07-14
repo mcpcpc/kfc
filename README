@@ -10,7 +10,7 @@ BACKGROUND
 This project was inspired by Dylan Arap's POSIX shell script, okpal [0]. This
 application has similar functionality to okpal but is designed with execution
 speed in mind. There are currently 293 light and dark palettes offered at 
-this time within this package (with more to come).  
+this time (with more to come).  
 
 
 COMPATIBILITY
