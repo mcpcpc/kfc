@@ -93,7 +93,10 @@ list_palette(void)
 
 	while( (de = readdir(p.dr)) != NULL )
 	{
-		puts(de->d_name);
+		if ( de->d_type == 8 )
+		{
+			puts(de->d_name);
+		}
 	}
 
 	closedir(p.dr);
