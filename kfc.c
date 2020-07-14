@@ -14,13 +14,13 @@ find_palettes(void)
 {
 	if ( access("/usr/share/kfc/palettes", F_OK) == 0 )
     {
-		strcpy(p.SEQ, "/usr/share/kfc/palettes");
+		strcpy(p.seq, "/usr/share/kfc/palettes");
         return 0;
     }
 
     if ( access("palettes", F_OK) == 0 )
     {
-		strcpy(p.SEQ, "palettes");
+		strcpy(p.seq, "palettes");
         return 0;
     }
 
@@ -32,7 +32,7 @@ select_palette(void)
 {
 	p.len = 255;
 	p.line = malloc(sizeof(char) * p.len);
-	p.fp = fopen(p.SEL, "r");
+	p.fp = fopen(p.sel, "r");
 
 	if (p.fp == NULL)
 	{
@@ -42,14 +42,14 @@ select_palette(void)
 
 	while(fgets(p.line, p.len, p.fp) != NULL)
 	{
-		p.EVAR = strtok(p.line, "=");
-		p.EVAL = strtok(NULL, "=");
-		setenv(p.EVAR, p.EVAL, 1);
+		p.evar = strtok(p.line, "=");
+		p.eval = strtok(NULL, "=");
+		setenv(p.evar, p.eval, 1);
 	}
 
 	fclose(p.fp);
 	free(p.line);
-	sprintf(p.PRI, "printf %%b \"\
+	sprintf(p.pri, "printf %%b \"\
 \\033]4;0;#$(echo $color00)\\033\\ \
 \\033]4;1;#$(echo $color01)\\033\\ \
 \\033]4;2;#$(echo $color02)\\033\\ \
@@ -69,23 +69,23 @@ select_palette(void)
 \\033]10;#$(echo $foreground)\\033\\ \
 \\033]11;#$(echo $background)\\033\\ \
 \\033]12;#$(echo $cursor)\\033\\ \" \033[21D");
-	p.fp = fopen(p.CSEQ, "w");
-	fprintf(p.fp, "%s", p.PRI);
+	p.fp = fopen(p.cseq, "w");
+	fprintf(p.fp, "%s", p.pri);
 	fclose(p.fp);
-	p.fp = fopen(p.CCUR, "w");
-	fprintf(p.fp, "%s", p.SEL);
+	p.fp = fopen(p.ccur, "w");
+	fprintf(p.fp, "%s", p.sel);
 	fclose(p.fp);
-	sprintf(p.CLI, "%s", p.PRI);
-	system(p.CLI);
+	sprintf(p.cli, "%s", p.pri);
+	system(p.cli);
 	return 0;
 }
 
 int
 list_palette(void)
 {
-	p.dr = opendir(p.SEL);
+	p.dr = opendir(p.sel);
 
-	if (p.dr == NULL)
+	if ( p.dr == NULL )
 	{
 		fprintf(stderr, "Could not open directory\n");
 		return 1;
@@ -106,10 +106,10 @@ list_palette(void)
 int
 random_palette(void)
 {
-	p.dr = opendir(p.SEL);
+	p.dr = opendir(p.sel);
 	p.randf = 0;
 
-	if (p.dr == NULL)
+	if ( p.dr == NULL )
 	{
 		fprintf(stderr, "Could not open directory\n");
 		return 1;
@@ -124,13 +124,13 @@ random_palette(void)
 	srand(time(0));
 	p.i = (rand() % (p.randf - 2 + 1)) + 2;
 	p.randf = 0;
-	p.dr = opendir(p.SEL);
-	while(( de = readdir(p.dr)) != NULL )
+	p.dr = opendir(p.sel);
+	while( (de = readdir(p.dr)) != NULL )
 	{
 		if (p.i == p.randf)
 		{
-			strcat(p.SEL, "/");
-			strcat(p.SEL, de->d_name);
+			strcat(p.sel, "/");
+			strcat(p.sel, de->d_name);
 		}
 		p.randf++;
 	}
@@ -142,7 +142,7 @@ print_palette(void)
 {
 	p.len = 255;
 	p.line = malloc(sizeof(char) * p.len);
-    p.fp = fopen(p.CCUR, "r");
+    p.fp = fopen(p.ccur, "r");
 
 	if (p.fp == NULL)
 	{
@@ -154,7 +154,7 @@ print_palette(void)
 	fclose(p.fp);
 	free(p.line);
 
-    for (p.i  = 0; p.i < 15; p.i++)
+    for ( p.i  = 0; p.i < 15; p.i++ )
 	{
 		printf("\033[48;5;%dm  \033[0m", p.i);
 
@@ -169,6 +169,21 @@ print_palette(void)
 }
 
 int
+print_usage(void)
+{
+    printf("\
+usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
+-s palette  Select a palette\n \
+-l          List all palettes\n \
+-p          Print current palette\n \
+-r          Select a random palette\n \
+-L          Set light themes (modifier for -s/-r)\n \
+-h          Show this information\n \
+-v          Show version information\n");
+	return 0;
+}
+
+int
 main(int argc, char **argv)
 {
     if (argc == 1)
@@ -179,23 +194,25 @@ main(int argc, char **argv)
 	
 	extern char *optarg;
 	extern int optind, optopt;
-	p.MODE = "dark";
+	int eflag, sflag, rflag, lflag;
+	eflag = sflag = rflag = lflag = 0;
+	p.mode = "dark";
 
-	if ( (p.CONF = getenv("XDG_CONFIG_HOME")) == NULL )
+	if ( (p.conf = getenv("XDG_CONFIG_HOME")) == NULL )
     {
         fprintf(stderr, "XDG_CONFIG_HOME not defined\n");
         exit(2);
     }
 
-	strcat(p.CONF, "/kfc");
+	strcat(p.conf, "/kfc");
 	
-	if ( mkdir(p.CONF,0777) == 0 )
+	if ( mkdir(p.conf, 0777) == 0 )
 	{
 		puts("Created 'kfc' directory in XDG_CONFIG_HOME.");
 	}
 
-	snprintf(p.CCUR, sizeof(p.CCUR), "%s/current", p.CONF);
-	snprintf(p.CSEQ, sizeof(p.CSEQ), "%s/sequence", p.CONF);
+	snprintf(p.ccur, sizeof(p.ccur), "%s/current", p.conf);
+	snprintf(p.cseq, sizeof(p.cseq), "%s/sequence", p.conf);
 	
     if (find_palettes() == 1)
     {
@@ -207,51 +224,69 @@ main(int argc, char **argv)
     {
         switch (p.cval)
         {
-            case 'r':
-				snprintf(p.SEL, sizeof(p.SEL), "%s/%s", p.SEQ, p.MODE);
-                random_palette();
-				select_palette();
-				break;
-            case 'l':
-				snprintf(p.SEL, sizeof(p.SEL), "%s/%s", p.SEQ, p.MODE);
-				list_palette();
-                break;
-            case 'L':
-                p.MODE = "light";
-                break;
             case 'v':
-                printf("0.0.8\n");
+                puts("0.0.8");
                 break;
             case 'h':
-                p.FLAG++;
+				print_usage();
                 break;
+            case 'L':
+                p.mode = "light";
+                break;
+            case 'l':
+				lflag++;
+                break;
+            case 'r':
+				sflag++;
+				rflag++;
+				break;
             case 's':
-				snprintf(p.SEL, sizeof(p.SEL), "%s/%s/%s", p.SEQ, p.MODE, optarg);
-				select_palette();
+				if (rflag)
+				{
+					fprintf(stderr, "Cannot specify -r with -s\n");
+					eflag++;
+				}
+				sflag++;
+				p.sval = optarg;
                 break;
             case 'p':
 				print_palette();
 				break;
             case ':':
                 fprintf(stderr, "Option -%c requires an operand\n", optopt);
-                p.FLAG++;
+                eflag++;
                 break;
             case '?':
                 fprintf(stderr, "Unrecognized option: -%c\n", optopt);
-                p.FLAG++;
+                eflag++;
         }
-    }
-    if (p.FLAG)
+	}
+
+    if (eflag)
     {
-        printf("\
-usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
--s palette  Select a palette\n \
--l          List all palettes\n \
--p          Print current palette\n \
--r          Select a random palette\n \
--L          Set light themes (modifier for -s/-r)\n \
--h          Show this information\n \
--v          Show version information\n");
-    }
+		print_usage();
+		exit(2);
+	}
+
+	snprintf(p.sel, sizeof(p.sel), "%s/%s", p.seq, p.mode);
+	
+	if (lflag)
+	{
+		list_palette();
+	}
+
+	if (sflag)
+	{
+		if (rflag)
+		{
+            random_palette();
+		}
+		else
+		{
+			snprintf(p.sel, sizeof(p.sel), "%s/%s/%s", p.seq, p.mode, p.sval);
+		}
+		select_palette();
+	}
+
     return 0;
 }

@@ -7,17 +7,17 @@ struct
 	DIR *dr;
 	char *line;
 	size_t len;
-    int FLAG; // flag to print useage page
-	char *MODE; // "light" or "dark"
-    char *CONF; // configuration path
-	char *EVAR; // environment variable name
-	char *EVAL; // environment variable value
-    char SEQ[225];
-    char CCUR[255]; // configuration path, current file
-    char CSEQ[255]; // configuration path, sequence file
-    char SEL[1023]; // selected palette
-    char PRI[1023];
-	char CLI[1023];
+    char *sval;
+	char *mode; // "light" or "dark"
+    char *conf; // configuration path
+	char *evar; // environment variable name
+	char *eval; // environment variable value
+    char seq[225];
+    char ccur[255]; // configuration path, current file
+    char cseq[255]; // configuration path, sequence file
+    char sel[1023]; // selected palette
+    char pri[1023];
+	char cli[1023];
 } p;
 
 struct dirent *de;
