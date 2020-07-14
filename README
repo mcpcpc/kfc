@@ -62,7 +62,7 @@ EXAMPLES
 --------
 
 For the following examples, remember to replace PALETTE with your preferred 
-color palette. Refer to the USAGE section for more information on options.
+color palette. 
 
 - To see if a specific light color palette is available:
 
@@ -82,6 +82,8 @@ color palette. Refer to the USAGE section for more information on options.
   ~/.ashrc or ~/.bashrc):
   
       [ -x "$(command -v kfc)" ] && kfc -s PALETTE
+
+Refer to the USAGE section for more information on options.
 
 
 NEW PALETTES
