@@ -9,43 +9,51 @@ BACKGROUND
 
 This project was inspired by Dylan Arap's POSIX shell script, okpal [0]. This
 application has similar functionality to okpal but is designed with execution
-speed in mind. There are currently >280 light and dark palettes offered at 
+speed in mind. There are currently 293 light and dark palettes offered at 
 this time within this package (with more to come).  
 
 
-INSTALLATION
-------------
+COMPATIBILITY
+-------------
 
-Other than a terminal emulator and C compiler (e.g. gcc), the application has 
-no other dependencies.
-
-- Building and installing from source:
-
-  $ git clone https://github.com/mcpcpc/kfc.git
-  $ cd kfc/
-  $ make
-  $ make install
-
-- Installing on KISS Linux:
-
-  $ kiss b kfc && kiss i kfc
-
-Compatibility with the following terminator emulators on KISS Linux have been 
-tested:
+Compatibility with the following terminator-emulators on KISS Linux have been 
+tested at this time:
 
 - simple terminal, st [2] 
 - alacritty [3]
 
 
+DEPENDENCIES
+------------
+
+Other than a terminal emulator and C compiler (e.g. gcc), the application has 
+no other dependencies.
+
+
+INSTALLATION
+------------
+
+Building and installing from source:
+
+$ git clone https://github.com/mcpcpc/kfc.git
+$ cd kfc/
+$ make
+$ make install
+
+Installing on KISS Linux:
+
+$ kiss b kfc && kiss i kfc
+
+
 USAGE
 -----
 
-kfc [-s palette|-L|-r] [l|-v|-p]
--s palette  Select a palette
--l          List all palettes
--p          Print current palette
+kfc [-l|-L|-r|-s palette] [|-v|-p]
+-l          List palettes
+-L          Set light themes (modifier for -s/-r/-l)
 -r          Select a random palette
--L          Set light themes (modifier for -s/-r)
+-s palette  Select a palette
+-p          Print current palette
 -h          Show this information
 -v          Show version information
 

@@ -172,12 +172,12 @@ int
 print_usage(void)
 {
     printf("\
-usage: kfc [-s palette|-r|-L] [l|-v|-p]\n \
--s palette  Select a palette\n \
+usage: kfc [-l|-L|-r|-s palette] [-v|-p]\n \
 -l          List all palettes\n \
--p          Print current palette\n \
--r          Select a random palette\n \
 -L          Set light themes (modifier for -s/-r)\n \
+-r          Select a random palette\n \
+-s palette  Select a palette\n \
+-p          Print current palette\n \
 -h          Show this information\n \
 -v          Show version information\n");
 	return 0;
