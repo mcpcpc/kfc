@@ -20,7 +20,7 @@ COMPATIBILITY
 -------------
 
 Compatibility with the following terminator-emulators on KISS Linux have been 
-tested:
+tested and confirmed:
 
 - simple terminal, st [2] 
 - alacritty [3]
