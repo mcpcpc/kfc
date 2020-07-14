@@ -35,14 +35,14 @@ INSTALLATION
 
 Building and installing from source:
 
-$ git clone https://github.com/mcpcpc/kfc.git
-$ cd kfc/
-$ make
-$ make install
+    git clone https://github.com/mcpcpc/kfc.git
+    cd kfc/
+    make
+    make install
 
 Installing on KISS Linux:
 
-$ kiss b kfc && kiss i kfc
+    kiss b kfc && kiss i kfc
 
 
 USAGE
@@ -61,15 +61,28 @@ kfc [-l|-L|-r|-s palette] [|-v|-p]
 EXAMPLES
 --------
 
+For the following examples, remember to replace PALETTE with your preferred 
+color palette. Refer to the USAGE section for more information on options.
+
+- To see if a specific light color palette is available:
+
+      kfc -lL | grep PALETTE
+
+- To apply the light version of the PALETTE:
+
+      kfc -Ls PALETTE
+
+- To verify that the palette was applied (or see the last palette that was
+  applied):
+
+      kfc -p
+
 - To apply a color palette automatically to a new terminal window, you can add 
   the following line to one of your system startup files (e.g ~/.profile,
   ~/.ashrc or ~/.bashrc):
   
       [ -x "$(command -v kfc)" ] && kfc -s PALETTE
-  
-  Remember to replace PALETTE in the line above with your preferred color 
-  palette.
-  
+
 
 NEW PALETTES
 ------------
@@ -85,5 +98,5 @@ REFERENCES
 [2] Note that background, foreground and cursor color setting does not work
     without applying the 'OSC 10 11 12' patch.
     https://st.suckless.org
-[3] Confirmed to work in wayland per sdsddsd1.
+[3] Confirmed to work in wayland (per sdsddsd1).
     https://github.com/mcpcpc/kfc/issues/1#issuecomment-657241830
