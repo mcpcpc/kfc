@@ -86,7 +86,7 @@ color palette.
   
       [ -x "$(command -v kfc)" ] && kfc -s PALETTE
 
-Refer to the USAGE section for more information on options.
+Refer to the USAGE section for more information on arguments.
 
 
 NEW PALETTES
