@@ -194,8 +194,8 @@ main(int argc, char **argv)
 	
 	extern char *optarg;
 	extern int optind, optopt;
-	int eflag, sflag, rflag, lflag;
-	eflag = sflag = rflag = lflag = 0;
+	int eflag, sflag, rflag, lflag, pflag;
+	eflag = sflag = rflag = lflag = pflag = 0;
 	p.mode = "dark";
 
 	if ( (p.conf = getenv("XDG_CONFIG_HOME")) == NULL )
@@ -250,7 +250,7 @@ main(int argc, char **argv)
 				p.sval = optarg;
                 break;
             case 'p':
-				print_palette();
+				pflag++;
 				break;
             case ':':
                 fprintf(stderr, "Option -%c requires an operand\n", optopt);
@@ -286,6 +286,11 @@ main(int argc, char **argv)
 			snprintf(p.sel, sizeof(p.sel), "%s/%s/%s", p.seq, p.mode, p.sval);
 		}
 		select_palette();
+	}
+
+	if (pflag)
+	{
+	    print_palette();
 	}
 
     return 0;
