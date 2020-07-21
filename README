@@ -21,8 +21,8 @@ COMPATIBILITY
 Compatibility with the following terminator-emulators on KISS Linux have been 
 tested and confirmed:
 
-- simple terminal, st [2] 
-- alacritty [3]
+- simple terminal, st [1] 
+- alacritty [2]
 
 
 DEPENDENCIES
@@ -98,9 +98,8 @@ in the docs/ folder) by creating a Pull Request.
 REFERENCES
 ----------
 [0] https://github.com/dylanaraps/okpal
-[1] https://pubs.opengroup.org/onlinepubs/7908799/xsh/getopt.html
-[2] Note that background, foreground and cursor color setting does not work
+[1] Note that background, foreground and cursor color setting does not work
     without applying the 'OSC 10 11 12' patch.
     https://st.suckless.org
-[3] Confirmed to work in wayland (per sdsddsd1).
+[2] Confirmed to work in wayland (per sdsddsd1).
     https://github.com/mcpcpc/kfc/issues/1#issuecomment-657241830
