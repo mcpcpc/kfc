@@ -1,6 +1,6 @@
 kfc
 
-kiss for colors, a terminal-emulator color palette setter written in C.
+KISS for colors, a terminal-emulator color palette setter written in C.
 
 
 BACKGROUND
@@ -28,8 +28,8 @@ tested and confirmed:
 DEPENDENCIES
 ------------
 
-Other than a terminal emulator and C compiler (e.g. gcc), the application has 
-no other dependencies.
+Other than a terminal-emulator and C99 compiler, this application has no 
+other dependencies.
 
 
 INSTALLATION
