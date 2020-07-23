@@ -50,13 +50,12 @@ Installing on KISS Linux:
 USAGE
 -----
 
-kfc [-l|-L|-r|-s palette] [|-v|-p]
--l          List palettes
+kfc [-L] [-r|-s palette] [-l|-p|-v]
 -L          Set light themes (modifier for -s/-r/-l)
 -r          Select a random palette
 -s palette  Select a palette
+-l          List palettes
 -p          Print current palette
--h          Show this information
 -v          Show version information
 
 
