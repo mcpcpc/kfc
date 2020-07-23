@@ -225,7 +225,7 @@ main(int argc, char **argv)
         switch (p.cval)
         {
             case 'v':
-                puts("0.0.9");
+                puts("0.1.0");
                 break;
             case 'h':
 				print_usage();
