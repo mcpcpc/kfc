@@ -1,3 +1,4 @@
+/* See LICENSE file for license details. */
 #define _POSIX_C_SOURCE 200809L
 #include <dirent.h>
 #include <getopt.h>
@@ -11,7 +12,8 @@
 
 struct dirent *de;
 
-static int i, cval, randf, rflag, lflag, pflag = 0;
+static int i, cval, randf, 
+static int rflag, lflag, pflag = 0; /* argument flags */
 static size_t len = BUFF;
 static char *line, *sval, *mode, *conf, *evar, *eval, *seq = NULL;
 static char sel[BUFF];
