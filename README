@@ -12,17 +12,17 @@ windows. This allows one to achieve consistent colors across all terminal
 utilities and applications. This application has similar functionality to okpal 
 but is designed with execution speed in mind. There are currently 300 light and 
 dark color palettes offered at this time that can be applied and quickly swapped 
-out for others.  
+out for others.
 
 
 COMPATIBILITY
 -------------
 
-Compatibility with the following terminator-emulators on KISS Linux have been 
-tested and confirmed:
+Compatibility with the following terminator-emulators have been tested and 
+confirmed on KISS Linux [1]:
 
-- simple terminal, st [1] 
-- alacritty [2]
+- simple terminal, st [2]
+- alacritty [3]
 
 
 DEPENDENCIES
@@ -44,7 +44,8 @@ Building and installing from source:
 
 Installing on KISS Linux:
 
-    kiss b kfc && kiss i kfc
+    kiss b kfc
+    kiss i kfc
 
 
 USAGE
@@ -97,8 +98,9 @@ in the docs/ folder) by creating a Pull Request.
 REFERENCES
 ----------
 [0] https://github.com/dylanaraps/okpal
-[1] Note that background, foreground and cursor color setting does not work
+[1] https://k1ss.org
+[2] Note that background, foreground and cursor color setting does not work
     without applying the 'OSC 10 11 12' patch.
     https://st.suckless.org
-[2] Confirmed to work in wayland (per sdsddsd1).
+[3] Confirmed to work in wayland (per sdsddsd1).
     https://github.com/mcpcpc/kfc/issues/1#issuecomment-657241830

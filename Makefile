@@ -5,7 +5,7 @@ CC     ?= gcc
 
 all: kfc
 
-kfc: kfc.c kfc.h Makefile
+kfc: kfc.c Makefile
 	$(CC) -O3 $(CFLAGS) -o $@ $< -lX11 $(LDFLAGS)
 
 install: all
