@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include "kfc.h"
 
-struct dirent *de;
+struct dirent **de;
 
 static int i, cval, randf; 
 static int rflag, lflag, pflag = 0; /* argument flags */
@@ -18,7 +18,6 @@ static size_t len = BUFF;
 static char *line, *sval, *mode, *conf, *evar, *eval, *seq = NULL;
 static char sel[BUFF];
 static FILE *fp;
-static DIR *dr;
 
 static void
 find_palettes(void)
@@ -68,56 +67,38 @@ select_palette(void)
 static void
 list_palette(void)
 {
-	dr = opendir(sel);
+	int n = scandir(sel, &de, NULL, alphasort);
 
-	if ( dr == NULL )
+    while (n--)
 	{
-		fprintf(stderr, "Could not open directory\n");
-		exit(1);
-	}
-
-	while( (de = readdir(dr)) != NULL )
-	{
-		if ( de->d_type == 8 )
+		if (de[n]->d_type == 8)
 		{
-			printf("%s/%s\n", mode, de->d_name);
+			printf("%s/%s\n", mode, de[n]->d_name);
 		}
 	}
 
-	closedir(dr);
+	free(de);
 }
 
 static void
 random_palette(void)
 {
-	dr = opendir(sel);
+	int n = scandir(sel, &de, NULL, alphasort);
 	randf = 0;
 
-	if ( dr == NULL )
-	{
-		fprintf(stderr, "Could not open directory\n");
-		exit(1);
-	}
-
-	while( (de = readdir(dr)) != NULL )
-	{
-		randf++;
-	}
-
-	closedir(dr);
 	srand(time(0));
-	i = (rand() % (randf - 0 + 1)) + 0;
-	randf = 0;
-	dr = opendir(sel);
-	while( (de = readdir(dr)) != NULL )
+	i = (rand() % (n - 0 + 1)) + 0;
+
+	while(n--)
 	{
 		if (i == randf)
 		{
 			strcat(sel, "/");
-			strcat(sel, de->d_name);
+			strcat(sel, de[n]->d_name);
 		}
 		randf++;
 	}
+	free(de);
 }
 
 static void
@@ -157,14 +138,14 @@ usage: kfc [-L] [-r|-s palette] [-l|-p|-v]\n \
 int
 main(int argc, char **argv)
 {
+	extern char *optarg;
+	extern int optind, optopt;
+
     if (argc == 1)
 	{
         fprintf(stderr, "No argument(s) provided\n");
         exit(1);
 	}
-	
-	extern char *optarg;
-	extern int optind, optopt;
 
 	mode = "dark";
 
