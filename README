@@ -52,9 +52,9 @@ USAGE
 
 kfc [-L] [-r|-s palette] [-l|-p|-v]
 -L          Set light themes (modifier for -s/-r/-l)
--r          Select a random palette
--s palette  Select a palette
--l          List palettes
+-r          Select a random palette (dark theme by default)
+-s palette  Select a palette (dark theme by default)
+-l          List palettes (dark themes by default)
 -p          Print current palette
 -v          Show version information
 

@@ -31,7 +31,7 @@ find_palettes(void)
     }
     else
     {
-        fprintf(stderr, "Palette directory not found\n");
+        fprintf(stderr, "Palette source directory not found\n");
         exit(1);
     }
 }
@@ -144,9 +144,9 @@ usage(void)
     fprintf(stderr, "\
 usage: kfc [-L] [-r|-s palette] [-l|-p|-v]\n \
 -L          Set light themes (modifier for -s/-r)\n \
--r          Select a random palette\n \
--s palette  Select a palette\n \
--l          List all palettes\n \
+-r          Select a random palette (dark theme by default)\n \
+-s palette  Select a palette (dark theme by default)\n \
+-l          List all palettes (dark themes by default)\n \
 -p          Print current palette\n \
 -v          Show version information\n");
 	exit(1);
@@ -157,7 +157,7 @@ main(int argc, char **argv)
 {
     if (argc == 1)
 	{
-        fprintf(stderr, "No argumemts provided\n");
+        fprintf(stderr, "No argument(s) provided\n");
         exit(1);
 	}
 	
