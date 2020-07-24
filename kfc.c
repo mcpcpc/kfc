@@ -12,7 +12,7 @@
 struct dirent *de;
 
 static int i, cval, randf, rflag, lflag, pflag = 0;
-static size_t len = 255;
+static size_t len = BUFF;
 static char *line, *sval, *mode, *conf, *evar, *eval, *seq = NULL;
 static char sel[BUFF];
 static FILE *fp;
