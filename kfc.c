@@ -12,7 +12,7 @@
 
 struct dirent *de;
 
-static int i, cval, randf, 
+static int i, cval, randf; 
 static int rflag, lflag, pflag = 0; /* argument flags */
 static size_t len = BUFF;
 static char *line, *sval, *mode, *conf, *evar, *eval, *seq = NULL;
@@ -80,7 +80,7 @@ list_palette(void)
 	{
 		if ( de->d_type == 8 )
 		{
-			puts(de->d_name);
+			printf("%s/%s\n", mode, de->d_name);
 		}
 	}
 
