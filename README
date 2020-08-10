@@ -23,6 +23,7 @@ confirmed on KISS Linux [1]:
 
 - simple terminal, st [2]
 - alacritty [3]
+- xterm [4]
 
 
 DEPENDENCIES
@@ -103,4 +104,6 @@ REFERENCES
     without applying the 'OSC 10 11 12' patch.
     https://st.suckless.org
 [3] Confirmed to work in wayland (per sdsddsd1).
-    https://github.com/mcpcpc/kfc/issues/1#issuecomment-657241830
+    https://github.com/mcpcpc/kfc/issues/1
+[4] Confirmed by periish.
+    https://github.com/mcpcpc/kfc/issues/3
