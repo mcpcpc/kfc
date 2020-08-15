@@ -9,8 +9,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#define VERSION "0.1.2"
-
 #define SEQUENCE "printf \"\
 \\033]4;0;#$(echo $color00)\\033\\ \
 \\033]4;1;#$(echo $color01)\\033\\ \
@@ -57,40 +55,33 @@ static char *mode = "dark"; /* selected mode string */
 static char *sval = NULL;   /* selected palette string */
 
 static void
-find_palettes(void)
-{
-    if (access("/usr/share/kfc/palettes", F_OK) == 0)
-    {
+find_palettes(void) {
+    if (access("/usr/share/kfc/palettes", F_OK) == 0) {
         seq = "/usr/share/kfc/palettes";
     }
-    else if (access("palettes", F_OK) == 0)
-    {
+    else if (access("palettes", F_OK) == 0) {
         seq = "palettes";
     }
-    else
-    {
+    else {
         fprintf(stderr, "Palette source directory not found\n");
         exit(1);
     }
 }
 
 static void
-select_palette(char *sel)
-{
+select_palette(char *sel) {
     char *evar, *eval, *line;
     FILE *fp = fopen(sel, "r");
     size_t len = 255;
 
     line = malloc(sizeof(char) * len);
 
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         fprintf(stderr, "Selected palette does not exist\n");
         exit(1);
     }
 
-    while (fgets(line, len, fp) != NULL)
-    {
+    while (fgets(line, len, fp) != NULL) {
         evar = strtok(line, "=");
         eval = strtok(NULL, "=");
         setenv(evar, eval, 1);
@@ -106,53 +97,41 @@ select_palette(char *sel)
 }
 
 static void
-list_palette(char *sel)
-{
+list_palette(char *sel) {
     struct dirent **de;
     int n = scandir(sel, &de, NULL, alphasort);
 
-    while (n--)
-    {
-        if (de[n]->d_type == 8)
-        {
-            printf("%s/%s\n", mode, de[n]->d_name);
-        }
+    while (n--) {
+        if (de[n]->d_type == 8) printf("%s/%s\n", mode, de[n]->d_name);
     }
 
     free(de);
 }
 
 static void
-random_palette(char *sel)
-{
+random_palette(char *sel) {
     struct dirent **de;
     int n = scandir(sel, &de, NULL, alphasort);
 
     srand(time(0));
     int i = (rand() % (n - 0 + 1)) + 0;
 
-    while (n--)
-    {
-        if (i == n)
-        {
-            sval = de[n]->d_name;
-        }
+    while (n--) {
+        if (i == n) sval = de[n]->d_name;
     }
 
     free(de);
 }
 
 static void
-print_palette(void)
-{
+print_palette(void) {
     FILE *fp = fopen(conf, "r");
     size_t len = 255;
     char *line;
 
     line = malloc(sizeof(char) * len);
 
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         fprintf(stderr, "No palette set or config file missing\n");
         exit(1);
     }
@@ -165,48 +144,26 @@ print_palette(void)
     printf(PALETTE);
 }
 
-static void
-usage(void)
-{
-    fprintf(stderr, "\
-usage: kfc [-L] [-r|-s palette] [-l|-p|-v]\n \
--L          Set light themes (modifier for -s/-r)\n \
--r          Select a random palette (dark theme by default)\n \
--s palette  Select a palette (dark theme by default)\n \
--l          List all palettes (dark themes by default)\n \
--p          Print current palette\n \
--v          Show version information\n");
-    exit(1);
-}
-
 int
-main(int argc, char **argv)
-{
-    extern char *optarg;
-    extern int optind, optopt;
+main(int argc, char **argv) {
     int cval;
-    int rflag = 0;
-    int lflag = 0;
-    int pflag = 0;
+    int rflag = 0, lflag = 0, pflag = 0;
     size_t len;
     char *sel, *tmp;
 
-    if (argc == 1)
-    {
+    if (argc == 1) {
         fprintf(stderr, "No argument(s) provided\n");
-        exit(1);
+        return 1;
     }
 
     tmp = getenv("XDG_CONFIG_HOME");
 
-    if (tmp != NULL)
-    {
+    if (tmp != NULL) {
         len = strlen(tmp) + sizeof("/kfc/current");
         conf = malloc(sizeof(char) * len);
         snprintf(conf, len, "%s", tmp);
     }
-    else
-    {
+    else {
         puts("XDG_CONFIG_HOME is not defined. Defaulting to HOME/.config");
         tmp = getenv("HOME");
         len = strlen(tmp) + sizeof("/.config/kfc/current");
@@ -216,49 +173,28 @@ main(int argc, char **argv)
 
     strcat(conf, "/kfc");
 
-    if (mkdir(conf, 0777) == 0)
-    {
+    if (mkdir(conf, 0777) == 0) {
         puts("Created 'kfc' directory in XDG_CONFIG_HOME");
     }
 
     strcat(conf, "/current");
     find_palettes();
 
-    while ((cval = getopt(argc, argv, "rlLpvs:" )) != -1)
-    {
-        switch (cval)
-        {
-            case 'v':
-                puts(VERSION);
-                break;
-            case 'L':
-                mode = "light";
-                break;
-            case 'l':
-                lflag++;
-                break;
-            case 'r':
-                rflag++;
-                break;
+    while ((cval = getopt(argc, argv, "rlLpvs:" )) != -1) {
+        switch (cval) {
+            case 'v': puts("kfc 0.1.2");  break;
+            case 'L': mode = "light";     break;
+            case 'l': lflag++;            break;
+            case 'r': rflag++;            break;
+            case 'p': pflag++;            break;
             case 's':
-                if (rflag)
-                {
-                    fprintf(stderr, "Cannot specify -r with -s\n");
-                    usage();
-                }
-                sval = optarg;
-                break;
-            case 'p':
-                pflag++;
-                break;
-            case ':':
-                fprintf(stderr, "Option -%c requires an operand\n", optopt);
-                usage();
-                break;
-            case '?':
-                fprintf(stderr, "Unrecognized option: -%c\n", optopt);
-                usage();
-                break;
+                if (rflag) {
+				    fprintf(stderr, "Cannot specify -r with -s\n");
+					return 1;
+				}
+				sval = optarg;
+				break;
+            case '?': return 1;
         }
     }
 
@@ -266,16 +202,15 @@ main(int argc, char **argv)
         + sizeof("/")
         + strlen(mode) 
         + (sval ? strlen(sval) + 1 : 0);
+
     sel = malloc(sizeof(char) * len);
 
-    if (lflag)
-    {
+    if (lflag) {
         snprintf(sel, len, "%s/%s", seq, mode);
         list_palette(sel);
     }
 
-    if (rflag) 
-    {
+    if (rflag) {
         snprintf(sel, len, "%s/%s", seq, mode);
         random_palette(sel);
         len = strlen(sel)
@@ -284,8 +219,7 @@ main(int argc, char **argv)
         sel = (char *)realloc(sel, sizeof(char) * len);
     }
 
-    if (sval)
-    {
+    if (sval) {
         snprintf(sel, len, "%s/%s/%s", seq, mode, sval);
         select_palette(sel);
     }
