@@ -24,6 +24,7 @@ confirmed on KISS Linux [1]:
 - simple terminal, st [2]
 - alacritty [3]
 - xterm [4]
+- kitty [5]
 
 
 DEPENDENCIES
@@ -107,3 +108,5 @@ REFERENCES
     https://github.com/mcpcpc/kfc/issues/1
 [4] Confirmed by periish.
     https://github.com/mcpcpc/kfc/issues/3
+[5] Confirmed by emokoi
+    https://github.com/mcpcpc/kfc/issues/4
