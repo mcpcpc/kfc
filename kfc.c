@@ -1,4 +1,8 @@
-/* See LICENSE file for license details. */
+/*
+ * SPDX-License-Identifier: MIT
+ * Copyright (C) 2020-3033 Michael Czigler
+ */
+ 
 #define _POSIX_C_SOURCE 200809L
 #include <dirent.h>
 #include <getopt.h>

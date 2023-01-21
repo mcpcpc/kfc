@@ -18,13 +18,12 @@ out for others.
 COMPATIBILITY
 -------------
 
-Compatibility with the following terminator-emulators have been tested and 
-confirmed on KISS Linux [1]:
+Compatibility with the following terminator-emulators have been tested:
 
-- simple terminal, st [2]
-- alacritty [3]
-- xterm [4]
-- kitty [5]
+- simple terminal, st [1]
+- alacritty 2]
+- xterm [3]
+- kitty [4]
 
 
 DEPENDENCIES
@@ -100,13 +99,12 @@ in the docs/ folder) by creating a Pull Request.
 REFERENCES
 ----------
 [0] https://github.com/dylanaraps/okpal
-[1] https://k1ss.org
-[2] Note that background, foreground and cursor color setting does not work
+[1] Note that background, foreground and cursor color setting does not work
     without applying the 'OSC 10 11 12' patch.
     https://st.suckless.org
-[3] Confirmed to work in wayland (per sdsddsd1).
+[2] Confirmed to work in wayland (per sdsddsd1).
     https://github.com/mcpcpc/kfc/issues/1
-[4] Confirmed by periish.
+[3] Confirmed by periish.
     https://github.com/mcpcpc/kfc/issues/3
-[5] Confirmed by emokoi
+[4] Confirmed by emokoi
     https://github.com/mcpcpc/kfc/issues/4
