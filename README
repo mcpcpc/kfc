@@ -21,7 +21,7 @@ COMPATIBILITY
 Compatibility with the following terminator-emulators have been tested:
 
 - simple terminal, st [1]
-- alacritty 2]
+- alacritty [2]
 - xterm [3]
 - kitty [4]
 
