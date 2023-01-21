@@ -186,7 +186,7 @@ main(int argc, char **argv) {
 
     while ((cval = getopt(argc, argv, "rlLpvs:" )) != -1) {
         switch (cval) {
-            case 'v': puts("kfc 0.1.2");  break;
+            case 'v': puts("kfc 0.1.4");  break;
             case 'L': mode = "light";     break;
             case 'l': lflag++;            break;
             case 'r': rflag++;            break;
