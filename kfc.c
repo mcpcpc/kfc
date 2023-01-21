@@ -1,6 +1,6 @@
 /*
  * SPDX-License-Identifier: MIT
- * Copyright (C) 2020-3033 Michael Czigler
+ * Copyright (C) 2020-2023 Michael Czigler
  */
  
 #define _POSIX_C_SOURCE 200809L
