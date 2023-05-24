@@ -6,7 +6,7 @@ CC     ?= gcc
 all: kfc
 
 kfc: kfc.c Makefile
-	$(CC) -O3 $(CFLAGS) -o $@ $< -lX11 $(LDFLAGS)
+	$(CC) -O3 $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 install: all
 	install -Dm755 kfc $(DESTDIR)$(BINDIR)/kfc
